@@ -25,15 +25,15 @@ class SuperAdminSeeder extends Seeder
         $user = User::create([
             'firstname' => 'Admin',
             'lastname' => 'Super',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('sae@2025'),
+            'email' => 'superadmin@gouv.bj',
+            'password' => Hash::make('Mtfp@2025'),
             'birthdate' => '1980-01-01',
             'birthplace' => 'Cityville',
             'address' => '123 Admin Street, Cityville'
         ]);
 
-     
-    
+
+
         UserSetting::create([
             'user_id' => $user->id,
             'use_2FA' => false,
@@ -41,7 +41,7 @@ class SuperAdminSeeder extends Seeder
             'notification_list' => null,
             'mode_2FA' => 'SMS',
         ]);
-       
+
         $user->assignRole($role);
 
     }

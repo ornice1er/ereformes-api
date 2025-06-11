@@ -49,15 +49,18 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             'profiles' => 'ProfilController',
             'permissions' => 'PermissionController',
             'notifications' => 'NotificationController',
-            'dossiers' => 'DossierController',
-            'documents' => 'DocumentController',
-            'regle-conservations' => 'RegleConservationController',
-            'audits' => 'AuditController'
+            "couvertures"=>"CouvertureController",
+            "affectations"=>"AffectationController",
+            "entities"=>"EntiteAdminController",
+            "natures"=>"NatureController",
+            "sectors"=>"SectorController",
+            "structures"=>"StructureController",
+            "reformes"=>"ReformeController",
+
         ]);
 
         Route::get('/logs', 'LogController@index');
 
-        Route::get('/documents-tree', 'DocumentController@getDocumentTree');
 
         Route::get('/dash', 'DashboardController@getDash');
 
@@ -66,6 +69,27 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('notifications/{id}/state/{state}', 'NotificationController@changeState');
         Route::post('notifications-search', 'NotificationController@search');
+
+         Route::get('couvertures/{id}/state/{state}', 'CouvertureController@changeState');
+        Route::post('couvertures-search', 'CouvertureController@search');
+
+        Route::get('affectations/{id}/state/{state}', 'AffectationController@changeState');
+        Route::post('affectations-search', 'AffectationController@search');
+
+        Route::get('entities/{id}/state/{state}', 'EntiteAdminController@changeState');
+        Route::post('entities-search', 'EntiteAdminController@search');
+
+        Route::get('natures/{id}/state/{state}', 'NatureController@changeStatgeState');
+        Route::post('natures-search', 'NatureController@search');
+
+        Route::get('sectors/{id}/state/{state}', 'SectorController@changeStatgeState');
+        Route::post('sectors-search', 'SectorController@search');
+
+        Route::get('structures/{id}/state/{state}', 'StructureController@changeStatgeState');
+        Route::post('structures-search', 'StructureController@search');
+
+        Route::get('reformes/{id}/state/{state}', 'ReformeController@changeStatgeState');
+        Route::post('reformes-search', 'ReformeController@search');
 
         Route::post('roles-search', 'RoleController@search');
         Route::post('permissions-search', 'PermissionController@search');
@@ -77,6 +101,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('users-search', 'UserController@search');
 
         Route::post('/profiles-copy', 'PermissionController@setCopy');
+
+        Route::get('backups', 'BackupController@index');
 
     });
 });
