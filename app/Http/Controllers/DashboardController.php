@@ -66,10 +66,10 @@ class DashboardController
      *      )
      * )
      */
-    public function getDash(Request $request)
+    public function index(Request $request)
     {
         try {
-            $result = $this->dashRepository->getDash($request);
+            $result = $this->dashRepository->index($request);
 
             return Common::success('Tableau de bord', $result);
         } catch (\Throwable $th) {
