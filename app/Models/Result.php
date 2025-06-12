@@ -11,7 +11,6 @@ class Result extends Model
     use HasFactory, Filterable;
     protected $guarded = [];
     public $timestamps = false;
-    protected $table="resultat";
 
     public function getLastSuiviResult()
     {

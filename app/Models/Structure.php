@@ -11,7 +11,6 @@ class Structure extends Model
     use HasFactory, Filterable;
     protected $guarded = [];
     public $timestamps = false;
-    protected $table="structure";
 
 
     public function sector()

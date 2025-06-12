@@ -12,12 +12,6 @@ class EntiteAdmin extends Model
 {
     use HasFactory, Filterable;
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'entite_admins';
 
     /**
      * The attributes that are mass assignable.

@@ -11,7 +11,6 @@ class PasswordReset extends Model
 
     protected $guarded = [];
 
-    protected $table = 'password_reset_tokens';
 
     protected $primaryKey = 'email';  // Définir la clé primaire correcte
 

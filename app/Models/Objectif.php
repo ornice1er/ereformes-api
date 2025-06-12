@@ -11,7 +11,6 @@ class Objectif extends Model
     use HasFactory, Filterable;
     protected $guarded = [];
     public $timestamps = false;
-    protected $table="objectif";
 
     public function reforme()
     {

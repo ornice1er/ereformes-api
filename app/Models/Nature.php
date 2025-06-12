@@ -11,6 +11,5 @@ class Nature extends Model
     use HasFactory, Filterable;
     protected $guarded = [];
     public $timestamps = false;
-    protected $table="nature";
 
 }

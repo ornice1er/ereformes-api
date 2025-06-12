@@ -12,7 +12,6 @@ class Parcours extends Model
     use HasFactory, Filterable;
     protected $guarded = [];
     public $timestamps = false;
-    protected $table="parcours";
 
     public function reforme()
     {

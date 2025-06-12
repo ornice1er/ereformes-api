@@ -12,7 +12,6 @@ class SuiviResult extends Model
     use HasFactory, Filterable;
     protected $guarded = [];
     public $timestamps = false;
-    protected $table="suivre_result";
 
     public function resultat(): BelongsTo
     {
