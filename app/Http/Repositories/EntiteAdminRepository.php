@@ -4,6 +4,8 @@ namespace App\Http\Repositories;
 
 use App\Models\EntiteAdmin;
 use App\Traits\Repository;
+use Validator;
+use Exception;
 
 class EntiteAdminRepository
 {
@@ -73,31 +75,86 @@ class EntiteAdminRepository
      */
   public function makeStore(array $data): EntiteAdmin
 {
+    try {
+        // Validation des données
+        $validator = Validator::make($data, [
+            'libelle' => 'required',
+        ]);
 
+        if ($validator->fails()) {
+            // Retourner les erreurs de validation
+            return [
+                'success' => false,
+                'errors' => $validator->errors(),
+                'status_code' => 404
+            ];
+        }
 
-    // Création de l'utilisateur
-    $EntiteAdmin = EntiteAdmin::create($data);
+        // Création de l'entité admin
+        $entiteAdmin = EntiteAdmin::create($data);
 
-    return $EntiteAdmin;
+        return [
+            'success' => true,
+            'data' => $entiteAdmin,
+            'message' => 'EntiteAdmin créée avec succès',
+            'status_code' => 201
+        ];
+
+    } catch (QueryException $ex) {
+        // Gestion des erreurs de base de données
+        return [
+            'success' => false,
+            'error' => $ex->getMessage(),
+            'status_code' => 500
+        ];
+    } catch (Exception $e) {
+        // Gestion des autres exceptions
+        return [
+            'success' => false,
+            'error' => $e->getMessage(),
+            'status_code' => 500
+        ];
+    }
 }
 
 
     /**
      * Update an existing EntiteAdmin
      */
-  public function makeUpdate($id, array $data): EntiteAdmin
-{
-    $model = EntiteAdmin::findOrFail($id);
+    public function makeUpdate($id, array $data)
+    {
+        try {
+            // Recherche de l'entité admin
+            $entiteAdmin = EntiteAdmin::findOrFail($id);
 
+            // Mise à jour des données
+            $entiteAdmin->update([
+                'libelle' => $data['libelle'] ?? $entiteAdmin->libelle,
+            ]);
 
+            return [
+                'success' => true,
+                'data' => $entiteAdmin,
+                'message' => 'EntiteAdmin mise à jour avec succès',
+                'status_code' => 200
+            ];
 
-    // Mise à jour des données utilisateur
-    $model->update($data);
-
-
-    return $model;
-}
-
+        } catch (QueryException $ex) {
+            // Gestion des erreurs de base de données
+            return [
+                'success' => false,
+                'error' => $ex->getMessage(),
+                'status_code' => 500
+            ];
+        } catch (Exception $e) {
+            // Gestion des autres exceptions (incluant ModelNotFoundException de findOrFail)
+            return [
+                'success' => false,
+                'error' => $e->getMessage(),
+                'status_code' => 500
+            ];
+        }
+    }
 
     /**
      * Delete a EntiteAdmin

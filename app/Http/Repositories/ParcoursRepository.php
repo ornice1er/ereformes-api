@@ -2,17 +2,17 @@
 
 namespace App\Http\Repositories;
 
-use App\Models\Couverture;
+use App\Models\Parcours;
 use App\Traits\Repository;
 
-class CouvertureRepository
+class ParcoursRepository
 {
     use Repository;
 
     /**
      * The model being queried.
      *
-     * @var Couverture
+     * @var Parcours
      */
     protected $model;
 
@@ -23,11 +23,11 @@ class CouvertureRepository
     public function __construct()
     {
         // Don't forget to update the model's name
-        $this->model = app(Couverture::class);
+        $this->model = app(Parcours::class);
     }
 
     /**
-     * Check if couverture exists
+     * Check if parcours exists
      */
     public function ifExist($id)
     {
@@ -35,13 +35,13 @@ class CouvertureRepository
     }
 
     /**
-     * Get all couvertures with filtering, pagination, and sorting
+     * Get all parcourss with filtering, pagination, and sorting
      */
     public function getAll($request)
     {
         $per_page = 10;
 
-        $req = Couverture::ignoreRequest(['per_page'])
+        $req = Parcours::ignoreRequest(['per_page', 'categorie', 'role'])
             ->filter(array_filter($request->all(), function ($k) {
                 return $k != 'page';
             }, ARRAY_FILTER_USE_KEY))
@@ -59,7 +59,7 @@ class CouvertureRepository
 
 
     /**
-     * Get a specific couverture by id
+     * Get a specific parcours by id
      */
     public function get($id)
     {
@@ -69,29 +69,29 @@ class CouvertureRepository
 
 
     /**
-     * Store a new couverture
+     * Store a new parcours
      */
-  public function makeStore(array $data): Couverture
+  public function makeStore(array $data): Parcours
 {
 
 
-    // Création de l'utilisateur
-    $couverture = Couverture::create($data);
+    // Création de l'parcours
+    $parcours = Parcours::create($data);
 
-    return $couverture;
+    return $parcours;
 }
 
 
     /**
-     * Update an existing couverture
+     * Update an existing parcours
      */
-  public function makeUpdate($id, array $data): Couverture
+  public function makeUpdate($id, array $data): Parcours
 {
-    $model = Couverture::findOrFail($id);
+    $model = Parcours::findOrFail($id);
 
 
 
-    // Mise à jour des données utilisateur
+    // Mise à jour des données parcours
     $model->update($data);
 
 
@@ -100,7 +100,7 @@ class CouvertureRepository
 
 
     /**
-     * Delete a couverture
+     * Delete a parcours
      */
     public function makeDestroy($id)
     {
@@ -108,7 +108,7 @@ class CouvertureRepository
     }
 
     /**
-     * Get the latest couvertures
+     * Get the latest parcourss
      */
     public function getLatest()
     {
@@ -121,11 +121,11 @@ class CouvertureRepository
     }
 
     /**
-     * Search for couvertures by name, email, or code
+     * Search for parcourss by name, email, or code
      */
     public function search($term)
     {
-        $query = Couverture::query(); // Start with an empty query
+        $query = Parcours::query(); // Start with an empty query
         $attrs = ['name', 'email', 'code']; // Attributes you want to search in
 
         foreach ($attrs as $value) {

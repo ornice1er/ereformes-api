@@ -4,6 +4,7 @@ namespace App\Http\Repositories;
 
 use App\Models\Nature;
 use App\Traits\Repository;
+use Exception;
 
 class NatureRepository
 {
@@ -71,32 +72,99 @@ class NatureRepository
     /**
      * Store a new nature
      */
-  public function makeStore(array $data): Nature
-{
+    public function makeStore(array $data)
+    {
+        try {
+            // Validation des données
+            $validator = Validator::make($data, [
+                "libnature" => "required|unique:nature"
+            ],
+            [
+                'libnature.required' => 'Le libellé est requis',
+                'libnature.unique' => 'Le libellé doit être unique',
+            ]);
 
+            if ($validator->fails()) {
+                return [
+                    'success' => false,
+                    'errors' => $validator->errors(),
+                    'status_code' => 500
+                ];
+            }
 
-    // Création de l'nature
-    $nature = Nature::create($data);
+            // Création de la nature
+            $nature = Nature::create($data);
 
-    return $nature;
-}
+            return [
+                'success' => true,
+                'data' => $nature,
+                'message' => "Enregistrement d'un nature",
+                'status_code' => 200
+            ];
 
+        } catch (QueryException $ex) {
+            return [
+                'success' => false,
+                'error' => $ex->getMessage(),
+                'status_code' => 500
+            ];
+        } catch (Exception $e) {
+            return [
+                'success' => false,
+                'error' => $e->getMessage(),
+                'status_code' => 500
+            ];
+        }
+    }
 
-    /**
-     * Update an existing nature
-     */
-  public function makeUpdate($id, array $data): Nature
-{
-    $model = Nature::findOrFail($id);
+    public function makeUpdate($id, array $data)
+    {
+        try {
+            // Validation des données avec exclusion de l'ID actuel pour la règle unique
+            $validator = Validator::make($data, [
+                "libnature" => "required|unique:nature,libnature," . $id
+            ],
+            [
+                'libnature.required' => 'Le libellé est requis',
+                'libnature.unique' => 'Le libellé doit être unique',
+            ]);
 
+            if ($validator->fails()) {
+                return [
+                    'success' => false,
+                    'errors' => $validator->errors(),
+                    'status_code' => 500
+                ];
+            }
 
+            // Recherche et mise à jour de la nature
+            $nature = Nature::findOrFail($id);
+            $nature->update($data);
 
-    // Mise à jour des données nature
-    $model->update($data);
+            // Récupération des données mises à jour
+            $nature = Nature::find($id);
 
+            return [
+                'success' => true,
+                'data' => $nature,
+                'message' => "Modification d'un nature",
+                'status_code' => 200
+            ];
 
-    return $model;
-}
+        } catch (QueryException $ex) {
+            return [
+                'success' => false,
+                'error' => $ex->getMessage(),
+                'status_code' => 500
+            ];
+        } catch (Exception $e) {
+            return [
+                'success' => false,
+                'error' => $e->getMessage(),
+                'status_code' => 500
+            ];
+        }
+    }
 
 
     /**

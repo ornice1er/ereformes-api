@@ -2,17 +2,17 @@
 
 namespace App\Http\Repositories;
 
-use App\Models\Couverture;
+use App\Models\Objectif;
 use App\Traits\Repository;
 
-class CouvertureRepository
+class ObjectifRepository
 {
     use Repository;
 
     /**
      * The model being queried.
      *
-     * @var Couverture
+     * @var Objectif
      */
     protected $model;
 
@@ -23,11 +23,11 @@ class CouvertureRepository
     public function __construct()
     {
         // Don't forget to update the model's name
-        $this->model = app(Couverture::class);
+        $this->model = app(Objectif::class);
     }
 
     /**
-     * Check if couverture exists
+     * Check if objectif exists
      */
     public function ifExist($id)
     {
@@ -35,13 +35,13 @@ class CouvertureRepository
     }
 
     /**
-     * Get all couvertures with filtering, pagination, and sorting
+     * Get all objectifs with filtering, pagination, and sorting
      */
     public function getAll($request)
     {
         $per_page = 10;
 
-        $req = Couverture::ignoreRequest(['per_page'])
+        $req = Objectif::ignoreRequest(['per_page', 'categorie', 'role'])
             ->filter(array_filter($request->all(), function ($k) {
                 return $k != 'page';
             }, ARRAY_FILTER_USE_KEY))
@@ -59,7 +59,7 @@ class CouvertureRepository
 
 
     /**
-     * Get a specific couverture by id
+     * Get a specific objectif by id
      */
     public function get($id)
     {
@@ -69,29 +69,29 @@ class CouvertureRepository
 
 
     /**
-     * Store a new couverture
+     * Store a new objectif
      */
-  public function makeStore(array $data): Couverture
+  public function makeStore(array $data): Objectif
 {
 
 
-    // Création de l'utilisateur
-    $couverture = Couverture::create($data);
+    // Création de l'objectif
+    $objectif = Objectif::create($data);
 
-    return $couverture;
+    return $objectif;
 }
 
 
     /**
-     * Update an existing couverture
+     * Update an existing objectif
      */
-  public function makeUpdate($id, array $data): Couverture
+  public function makeUpdate($id, array $data): Objectif
 {
-    $model = Couverture::findOrFail($id);
+    $model = Objectif::findOrFail($id);
 
 
 
-    // Mise à jour des données utilisateur
+    // Mise à jour des données objectif
     $model->update($data);
 
 
@@ -100,7 +100,7 @@ class CouvertureRepository
 
 
     /**
-     * Delete a couverture
+     * Delete a objectif
      */
     public function makeDestroy($id)
     {
@@ -108,7 +108,7 @@ class CouvertureRepository
     }
 
     /**
-     * Get the latest couvertures
+     * Get the latest objectifs
      */
     public function getLatest()
     {
@@ -121,11 +121,11 @@ class CouvertureRepository
     }
 
     /**
-     * Search for couvertures by name, email, or code
+     * Search for objectifs by name, email, or code
      */
     public function search($term)
     {
-        $query = Couverture::query(); // Start with an empty query
+        $query = Objectif::query(); // Start with an empty query
         $attrs = ['name', 'email', 'code']; // Attributes you want to search in
 
         foreach ($attrs as $value) {

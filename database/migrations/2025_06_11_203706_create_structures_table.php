@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('structures', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sector_id')->constrained('sector')->onDelete('cascade');
+            $table->foreignId('sector_id')->constrained('sectors')->onDelete('cascade');
             $table->string('sigl', 20)->unique();
             $table->string('designation', 255);
             $table->text('adresse_struct')->nullable();

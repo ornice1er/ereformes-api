@@ -2,17 +2,18 @@
 
 namespace App\Http\Repositories;
 
-use App\Models\Couverture;
+use App\Models\SuiviResult;
+use App\Models\SuivreResult;
 use App\Traits\Repository;
 
-class CouvertureRepository
+class SuivreResultRepository
 {
     use Repository;
 
     /**
      * The model being queried.
      *
-     * @var Couverture
+     * @var SuivreResult
      */
     protected $model;
 
@@ -23,11 +24,11 @@ class CouvertureRepository
     public function __construct()
     {
         // Don't forget to update the model's name
-        $this->model = app(Couverture::class);
+        $this->model = app(SuiviResult::class);
     }
 
     /**
-     * Check if couverture exists
+     * Check if SuivreResult exists
      */
     public function ifExist($id)
     {
@@ -35,13 +36,13 @@ class CouvertureRepository
     }
 
     /**
-     * Get all couvertures with filtering, pagination, and sorting
+     * Get all SuivreResults with filtering, pagination, and sorting
      */
     public function getAll($request)
     {
         $per_page = 10;
 
-        $req = Couverture::ignoreRequest(['per_page'])
+        $req = SuiviResult::ignoreRequest(['per_page', 'categorie', 'role'])
             ->filter(array_filter($request->all(), function ($k) {
                 return $k != 'page';
             }, ARRAY_FILTER_USE_KEY))
@@ -59,7 +60,7 @@ class CouvertureRepository
 
 
     /**
-     * Get a specific couverture by id
+     * Get a specific SuivreResult by id
      */
     public function get($id)
     {
@@ -69,29 +70,29 @@ class CouvertureRepository
 
 
     /**
-     * Store a new couverture
+     * Store a new SuivreResult
      */
-  public function makeStore(array $data): Couverture
+  public function makeStore(array $data): SuiviResult
 {
 
 
-    // Création de l'utilisateur
-    $couverture = Couverture::create($data);
+    // Création de l'SuivreResult
+    $SuivreResult = SuiviResult::create($data);
 
-    return $couverture;
+    return $SuivreResult;
 }
 
 
     /**
-     * Update an existing couverture
+     * Update an existing SuivreResult
      */
-  public function makeUpdate($id, array $data): Couverture
+  public function makeUpdate($id, array $data): SuiviResult
 {
-    $model = Couverture::findOrFail($id);
+    $model = SuiviResult::findOrFail($id);
 
 
 
-    // Mise à jour des données utilisateur
+    // Mise à jour des données SuivreResult
     $model->update($data);
 
 
@@ -100,7 +101,7 @@ class CouvertureRepository
 
 
     /**
-     * Delete a couverture
+     * Delete a SuivreResult
      */
     public function makeDestroy($id)
     {
@@ -108,7 +109,7 @@ class CouvertureRepository
     }
 
     /**
-     * Get the latest couvertures
+     * Get the latest SuivreResults
      */
     public function getLatest()
     {
@@ -121,11 +122,11 @@ class CouvertureRepository
     }
 
     /**
-     * Search for couvertures by name, email, or code
+     * Search for SuivreResults by name, email, or code
      */
     public function search($term)
     {
-        $query = Couverture::query(); // Start with an empty query
+        $query = SuiviResult::query(); // Start with an empty query
         $attrs = ['name', 'email', 'code']; // Attributes you want to search in
 
         foreach ($attrs as $value) {

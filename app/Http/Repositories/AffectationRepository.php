@@ -3,12 +3,16 @@
 namespace App\Http\Repositories;
 
 use App\Models\Affectation;
+use App\Models\User;
+use App\Models\Parcours;
+use App\Models\Reforme;
 use App\Traits\Repository;
 use App\Utilities\FileStorage;
 use App\Utilities\Mailer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
+use Auth;
 
 class AffectationRepository
 {
@@ -90,11 +94,82 @@ class AffectationRepository
      */
   public function makeStore(array $data): Affectation
 {
-    // Création de l'affectation
-    $affectation = Affectation::create($data);
+    $role=Auth::user()->roles()->first()->name;
+
+    if($request->sens==1){
+        switch ($role) {
+            case 'publication':
+                $ua_up=Auth::user();
+                $check= Affectation::where('reforme_id',$data['reforme_id'])->where('isLast',true)->first();
+
+                $ua_down=User::role(Role::where('name','validation')->first())->where("structure_id",$check->reforme->structure->id)->first();
+                if($check)$check->update(['isLast'=>false,"instruction"=>$data['instruction']]);
+
+                $newReq=Reforme::find($data['reforme_id']);
+                break;
+                case 'validation':
+                    $ua_up=Auth::user();
+                    $ua_down=User::role(Role::where('name','saisie')->first())->where("structure_id",Auth::user()->structure->id)->first();
+                    $check= Affectation::where('reforme_id',$data['reforme_id'])->where('isLast',true)->first();
+                    if($check)$check->update(['isLast'=>false,"instruction"=>$data['instruction']]);
+
+                    $newReq=Reforme::find($data['reforme_id']);
+                    break;
+
+            default:
+                return response()->json(["Plus de niveau d'affectation"], 500);
+
+                break;
+        }
+
+        Affectation::create([
+            'unite_admin_up'=>$ua_up->id,
+            'unite_admin_down'=>$ua_down->id,
+            'reforme_id'=>$data['reforme_id'],
+            'sens'=>$data['sens'],
+            'instruction'=>$data['instuction'],
+            'delay'=>date_create($data['delay']),
+            ]);
+            Parcours::create(['libelle'=>"Retour de la réforme ".$newReq->libref." par le/la ".$ua_up->structure->designation." au/à la " .$ua_down->structure->designation ,'reforme_id'=>$newReq->id]);
+           return true;
+
+    }else{
+
+        switch ($role) {
+            case 'saisie':
+                $ua_up=Auth::user();
+                $ua_down=User::role(Role::where('name','validation')->first())->where("structure_id",Auth::user()->structure->id)->first();
+                $check= Affectation::where('reforme_id',$data['reforme_id'])->where('isLast',true)->first();
+                if($check)$check->update(['isLast'=>false]);
+
+                break;
+                case 'validation':
+                    $ua_up=Auth::user();
+                    $ua_down=User::role(Role::where('name','publication')->first())->first();
+                    $check= Affectation::where('reforme_id',$data['reforme_id'])->where('isLast',true)->first();
+                    if($check)$check->update(['isLast'=>false]);
+
+                    break;
+
+            default:
+            return response()->json(["Plus de niveau de transmission"], 500);
+                break;
+        }
 
 
-    return $affectation;
+
+        $newReq=Reforme::find($data['reforme_id']);
+
+        Affectation::create([
+            'unite_admin_up'=>$ua_up->id,
+            'unite_admin_down'=>$ua_down->id,
+            'reforme_id'=>$data['reforme_id'],
+            'sens'=>$data['sens'],
+            ]);
+            Parcours::create(['libelle'=>"Transmission de la réforme par le/la ".$ua_up->structure->designation." au/à la " .$ua_down->structure->designation ,'reforme_id'=>$newReq->id]);
+            return true;
+        }
+
 }
 
 

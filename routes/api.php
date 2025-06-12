@@ -56,6 +56,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             "sectors"=>"SectorController",
             "structures"=>"StructureController",
             "reformes"=>"ReformeController",
+            "objectifs"=>"ObjectifController",
+            "resultats"=>"ResultController",
+            "suivi-results"=>"SuivreResultController",
 
         ]);
 
@@ -90,6 +93,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('reformes/{id}/state/{state}', 'ReformeController@changeStatgeState');
         Route::post('reformes-search', 'ReformeController@search');
+
+        Route::get('objectifs/{id}/state/{state}', 'objectifController@changeStatgeState');
+        Route::post('objectifs-search', 'ObjectifController@search');
+
+        Route::get('resultats/{id}/state/{state}', 'ResultController@changeStatgeState');
+        Route::post('resultats-search', 'ResultController@search');
+
+        Route::get('suivi-results/{id}/state/{state}', 'SuivreResultController@changeStatgeState');
+        Route::post('suivi-results-search', 'SuivreResultController@search');
 
         Route::post('roles-search', 'RoleController@search');
         Route::post('permissions-search', 'PermissionController@search');

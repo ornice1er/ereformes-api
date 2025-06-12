@@ -42,9 +42,9 @@ class UserAuthRepository
     /**
      * Constructor
      */
-    public function __construct(OTPService $otpService)
+    public function __construct()
     {
-        $this->otpService = $otpService;
+       // $this->otpService = $otpService;
         // Don't forget to update the model's name
         $this->model = app(UserAuth::class);
     }
