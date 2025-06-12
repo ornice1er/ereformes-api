@@ -5,6 +5,7 @@ namespace App\Http\Repositories;
 use App\Models\Reforme;
 use App\Traits\Repository;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class ReformeRepository
 {
