@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('action_name');
             $table->longText('description');
             $table->foreignId('done_by')->nullable();
+            $table->enum('origin', ['AUTH', 'EDITION', 'ACTIVITE', 'RAPPORT']);
             $table->timestamps();
         });
     }

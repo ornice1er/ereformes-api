@@ -23,7 +23,6 @@ return new class extends Migration
 
         Schema::table('users', function (Blueprint $table) {
             $table->softDeletes(); // Ajoute la colonne deleted_at
-            $table->timestamps();
         });
     }
 

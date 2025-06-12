@@ -26,10 +26,9 @@ return new class extends Migration
             $table->index(['reforme_id', 'isLast']);
             $table->index(['unite_admin_up', 'unite_admin_down']);
 
-            // Clés étrangères (à adapter selon vos tables)
-            // $table->foreign('reforme_id')->references('id')->on('reformes')->onDelete('cascade');
-            // $table->foreign('unite_admin_up')->references('id')->on('unite_admins')->onDelete('cascade');
-            // $table->foreign('unite_admin_down')->references('id')->on('unite_admins')->onDelete('cascade');
+            $table->foreign('reforme_id')->references('id')->on('reformes')->onDelete('cascade');
+            $table->foreign('unite_admin_up')->references('id')->on('entite_admins')->onDelete('cascade');
+            $table->foreign('unite_admin_down')->references('id')->on('entite_admins')->onDelete('cascade');
         });
     }
 

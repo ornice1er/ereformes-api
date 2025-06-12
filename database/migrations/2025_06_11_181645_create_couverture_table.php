@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('couverture', function (Blueprint $table) {
+        Schema::create('couvertures', function (Blueprint $table) {
             $table->id();
             $table->string('lib_couvert', 100)->unique();
             $table->timestamps();

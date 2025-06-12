@@ -66,7 +66,7 @@ return new class extends Migration
             $table->foreign('structure_id')->references('id')->on('structures')->onDelete('restrict');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
             $table->foreign('nature_id')->references('id')->on('natures')->onDelete('restrict');
-            $table->foreign('couverture_id')->references('id')->on('couverture')->onDelete('restrict');
+            $table->foreign('couverture_id')->references('id')->on('couvertures')->onDelete('restrict');
         });
     }
 
