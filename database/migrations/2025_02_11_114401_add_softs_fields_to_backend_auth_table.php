@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-   
-      
+
+
         Schema::table('settings', function (Blueprint $table) {
             $table->softDeletes(); // Ajoute la colonne deleted_at
         });
@@ -23,6 +23,7 @@ return new class extends Migration
 
         Schema::table('users', function (Blueprint $table) {
             $table->softDeletes(); // Ajoute la colonne deleted_at
+            $table->timestamps();
         });
     }
 
