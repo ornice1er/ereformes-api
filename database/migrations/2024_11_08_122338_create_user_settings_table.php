@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_settings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id');
             $table->boolean('use_2FA')->default(false);
             $table->boolean('accept_notification')->default(true);
             $table->text('notification_list')->nullable();
