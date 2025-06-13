@@ -32,7 +32,7 @@ class UpdateReformeRequest extends FormRequest
             'struct_impl' => 'sometimes|string|max:500|min:5',
             'periodexe' => 'sometimes|string',
             'date_debut' => 'sometimes|date',
-            'date_fin' => 'sometimes|date|after:date_debut',
+            'date_fin' => 'sometimes|date',
             'date_enreg' => 'sometimes|date|before_or_equal:today',
             'cadreinst_mor' => 'sometimes|string|max:100|min:2',
             'etat_mor' => 'sometimes|string|in:EN COURS,TERMINÉ,SUSPENDU,ANNULÉ',
