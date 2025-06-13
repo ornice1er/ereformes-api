@@ -526,24 +526,58 @@ class ReformeController extends Controller
     }
 
 
-    public function getSuiviResult()
+    public function getSuiviResult(Request $request)
     {
 
-        return $this->reformeRepository->getSuiviResult();
+        $message = 'Suivi des résultats';
+
+        try {
+            $result = $this->reformeRepository->getSuiviResult();
+            $this->ls->trace(['action_name' => $message, 'description' => json_encode($request->all())]);
+
+            return Common::success('Suivi des résultats avec succès', $result);
+        } catch (\Throwable $th) {
+            $this->ls->trace(['action_name' => $message, 'description' => $th->getMessage()]);
+
+            return Common::error($th->getMessage(), []);
+        }
 
     }
 
-    public function getMyList()
+    public function getMyList(Request $request)
     {
 
-        return $this->reformeRepository->getMyList();
+        $message = 'Liste des enrégistrement';
+
+        try {
+            $result = $this->reformeRepository->getMyList();
+            $this->ls->trace(['action_name' => $message, 'description' => json_encode($request->all())]);
+
+            return Common::success('Liste des enrégistrement obtenu avec succès', $result);
+        } catch (\Throwable $th) {
+            $this->ls->trace(['action_name' => $message, 'description' => $th->getMessage()]);
+
+            return Common::error($th->getMessage(), []);
+        }
 
     }
 
-    public function getByRole()
+    public function getByRole(Request $request)
     {
 
-        return $this->reformeRepository->getByRole();
+        $message = 'Liste des roles';
+
+        try {
+            $result = $this->reformeRepository->getByRole();
+            $this->ls->trace(['action_name' => $message, 'description' => json_encode($request->all())]);
+
+            return Common::success('Liste des roles obtenu avec succès', $result);
+        } catch (\Throwable $th) {
+            $this->ls->trace(['action_name' => $message, 'description' => $th->getMessage()]);
+
+            return Common::error($th->getMessage(), []);
+        }
+
 
     }
 
