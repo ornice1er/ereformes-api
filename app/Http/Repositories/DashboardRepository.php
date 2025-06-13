@@ -5,6 +5,7 @@ use App\Models\Structure;
 use App\Models\Media;
 use App\Models\Reforme;
 use App\Traits\Repository;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardRepository
 {
@@ -34,7 +35,7 @@ class DashboardRepository
 
 
         return [];
-       
+
     }
 
       public function index($request)
@@ -63,11 +64,11 @@ class DashboardRepository
                         $q->where('libnature', 'like', 'ins%');
                     })->count();
                     $data['total_structures']=Structure::count();
-                    $data['total_pending']=Reforme::where('isPublished',false)->where("user_id",Auth::id())->count();    
+                    $data['total_pending']=Reforme::where('isPublished',false)->where("user_id",Auth::id())->count();
                     break;
                     case 'saisie':
                         $idLevel=Auth::id();
-        
+
                         $data['total_pending']=Reforme::where('isPublished',false)->whereHas('affectations', function($q) use($idLevel) {
                             $q->where('unite_admin_down',"=", $idLevel)->where('isLast',"=", true);
                             })->count();
@@ -80,7 +81,7 @@ class DashboardRepository
                             $q->where('libnature', 'like', 'ins%');
                         })->count();
                       //  $data['total_pending']=Structure::count();
-    
+
                         break;
                         case 'validation':
                             $data['total_reforme']=Reforme::count();
@@ -91,10 +92,10 @@ class DashboardRepository
                                 $q->where('libnature', 'like', 'ins%');
                             })->count();
                             $idLevel=Auth::id();
-        
+
                             $data['total_pending']=Reforme::where('isPublished',false)->whereHas('affectations', function($q) use($idLevel) {
                                 $q->where('unite_admin_down',"=", $idLevel)->where('isLast',"=", true);
-                                })->count();        
+                                })->count();
                             break;
                             case 'publication':
                                 $data['total_reforme']=Reforme::count();
@@ -105,12 +106,12 @@ class DashboardRepository
                                     $q->where('libnature', 'like', 'ins%');
                                 })->count();
                                 $idLevel=Auth::id();
-        
+
                                 $data['total_pending']=Reforme::where('isPublished',false)->whereHas('affectations', function($q) use($idLevel) {
                                     $q->where('unite_admin_down',"=", $idLevel)->where('isLast',"=", true);
-                                    })->count();            
+                                    })->count();
                                 break;
-            
+
             default:
                 # code...
                 break;

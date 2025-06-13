@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Repositories;
-
+use App\Exceptions\JsonResponseException;
 use App\Models\Reforme;
+use App\Models\Affectation;
+use App\Models\Parcours;
 use App\Traits\Repository;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class ReformeRepository
 {
@@ -94,6 +97,8 @@ class ReformeRepository
      */
     public function makeStore(array $data)
     {
+        DB::beginTransaction();
+
         try {
             // Ajout des données automatiques
             $data['date_enreg'] = date_create(date("Y-m-d h:i:s"));
@@ -130,12 +135,20 @@ class ReformeRepository
                 'reforme_id' => $reforme->id
             ]);
 
+            DB::commit();
+
             return $reforme;
 
-        } catch (QueryException $ex) {
-            return $ex->getMessage();
+
         } catch (Exception $e) {
-            return$e->getMessage();
+            DB::rollback();
+
+            throw new JsonResponseException([
+                'message' => $e->getMessage(),
+                'success' => false,
+                'data' => null,
+                'warning' => null
+            ], 401);
         }
     }
 
