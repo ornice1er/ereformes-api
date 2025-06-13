@@ -26,7 +26,7 @@ class StoreAffectationRequest extends FormRequest
     {
          return [
             'reforme_id' => 'required|integer|exists:reformes,id',
-            'sens' => 'required|in:0,1',
+            'sens' => 'required|in:0,1,-1',
             'instruction' => 'nullable|string',
             'delay' => 'nullable|integer'
         ];

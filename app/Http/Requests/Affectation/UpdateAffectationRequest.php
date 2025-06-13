@@ -26,7 +26,7 @@ class UpdateAffectationRequest extends FormRequest
     {
         return [
             'reforme_id' => 'sometimes|integer|exists:reformes,id',
-            'sens' => 'sometimes|in:0,1',
+            'sens' => 'sometimes|in:0,1,-1',
             'instruction' => 'nullable|string',
             'delay' => 'nullable|integer',
         ];
