@@ -126,7 +126,7 @@ class CouvertureRepository
     public function search($term)
     {
         $query = Couverture::query(); // Start with an empty query
-        $attrs = ['name', 'email', 'code']; // Attributes you want to search in
+        $attrs = ['lib_couvert']; // Attributes you want to search in
 
         foreach ($attrs as $value) {
             $query->orWhere($value, 'like', '%'.$term.'%');
