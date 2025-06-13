@@ -79,27 +79,12 @@ class User extends Authenticatable implements JWTSubject
         });
     }
 
-    public function setFirstnameAttribute($value)
+
+    public function structure()
     {
-        $this->attributes['firstname'] = $value;
-        $this->updateFullName();
+        return $this->belongsTo(Structure::class,'structure_id');
     }
 
-    public function setLastnameAttribute($value)
-    {
-        $this->attributes['lastname'] = $value;
-        $this->updateFullName();
-    }
-
-    private function updateFullName()
-    {
-        $firstname = $this->attributes['firstname'] ?? '';
-        $lastname = $this->attributes['lastname'] ?? '';
-
-        $this->attributes['name'] = trim("$lastname $firstname");
-    }
-
-  
 
     public function settings()
     {

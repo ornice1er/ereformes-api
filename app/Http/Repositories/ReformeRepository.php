@@ -106,7 +106,7 @@ class ReformeRepository
 
             // Attribution de la structure selon le rôle
             if (in_array(Auth::user()->roles()->first()->name, ["saisie", "validation"])) {
-                $data['structure_id'] = Auth::user()->structure->id;
+                $data['structure_id'] = Auth::user()->structure?->id;
             }
 
             // Gestion des fichiers
