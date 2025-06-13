@@ -23,7 +23,7 @@ class UpdateSuivreResultRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'resultat_id' => [
+            'result_id' => [
                 'sometimes',
                 'integer',
                 'min:1',
@@ -46,8 +46,8 @@ class UpdateSuivreResultRequest extends FormRequest
                 'before_or_equal:today',
                 // Contrainte d'unicité en excluant l'enregistrement actuel
                 Rule::unique('suivi_results')->where(function ($query) {
-                    if ($this->has('results_id')) {
-                        return $query->where('results_id', $this->results_id);
+                    if ($this->has('result_id')) {
+                        return $query->where('result_id', $this->result_id);
                     }
                     return $query;
                 })->ignore($this->route('suivi_results'))
@@ -63,9 +63,9 @@ class UpdateSuivreResultRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'resultat_id.integer' => 'L\'identifiant du résultat doit être un nombre entier.',
-            'resultat_id.min' => 'L\'identifiant du résultat doit être supérieur à 0.',
-            'resultat_id.exists' => 'Le résultat sélectionné n\'existe pas.',
+            'result_id.integer' => 'L\'identifiant du résultat doit être un nombre entier.',
+            'result_id.min' => 'L\'identifiant du résultat doit être supérieur à 0.',
+            'result_id.exists' => 'Le résultat sélectionné n\'existe pas.',
 
             'taux_realisat.numeric' => 'Le taux de réalisation doit être un nombre.',
             'taux_realisat.min' => 'Le taux de réalisation doit être supérieur ou égal à 0.',
@@ -88,7 +88,7 @@ class UpdateSuivreResultRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'resultat_id' => 'identifiant du résultat',
+            'result_id' => 'identifiant du résultat',
             'taux_realisat' => 'taux de réalisation',
             'valeur_realise' => 'valeur réalisée',
             'date' => 'date'

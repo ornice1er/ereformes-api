@@ -15,14 +15,14 @@ class Result extends Model
     public function getLastSuiviResult()
     {
 
-       return $this->hasOne(SuiviResult::class,'resultat_id');
+       return $this->hasOne(SuiviResult::class,'result_id');
 
     }
 
     public function suiviResults()
     {
 
-       return $this->hasMany(SuiviResult::class,'resultat_id');
+       return $this->hasMany(SuiviResult::class,'result_id');
 
     }
 
