@@ -227,4 +227,28 @@ class ReformeRepository
         return $results;
     }
 
+    public function getMyList()
+    {
+
+        $idStructure=Auth::id();
+
+        $reformes=Reforme::where('user_id',Auth::id())->orderBy('id','desc')->get();
+
+        return $reformes;
+    }
+
+    public function getByRole()
+    {
+
+        $idLevel=Auth::id();
+
+        $reformes=Reforme::with(['objectifs.results','affectation','files'])->where('isPublished',false)->whereHas('affectations', function($q) use($idLevel) {
+            $q->where('unite_admin_down',"=", $idLevel)->where('isLast',"=", true);
+            })->orderBy('id','desc')->get();
+
+        return $reformes;
+
+
+    }
+
 }

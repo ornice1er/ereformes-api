@@ -533,6 +533,20 @@ class ReformeController extends Controller
 
     }
 
+    public function getMyList()
+    {
+
+        return $this->reformeRepository->getMyList();
+
+    }
+
+    public function getByRole()
+    {
+
+        return $this->reformeRepository->getByRole();
+
+    }
+
 }
 
 
