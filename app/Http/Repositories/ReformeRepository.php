@@ -47,7 +47,7 @@ class ReformeRepository
     public function getAll($request)
     {
 
-    try {
+
         $per_page = 10;
 
         // Logique de filtrage par rôle
@@ -78,9 +78,7 @@ class ReformeRepository
             return $req->get();
         }
 
-    } catch (Exception $e) {
-        return $req->get();
-    }
+
     }
 
 
@@ -221,33 +219,51 @@ class ReformeRepository
     }
 
 
-    public function getSuiviResult()
+    public function getSuiviResult($request)
     {
-        $results=Result::with(['getLastSuiviResult','objectif.reforme.nature','suiviResults'])->get();
-        return $results;
+
+        $per_page = 10;
+
+        $req=Result::with(['getLastSuiviResult','objectif.reforme.nature','suiviResults']);
+        if (array_key_exists('per_page', $request->all())) {
+            $per_page = $request['per_page'];
+            return $req->paginate($per_page);
+        } else {
+            return $req->get();
+        }
     }
 
-    public function getMyList()
+    public function getMyList($request)
     {
+
+        $per_page=10;
 
         $idStructure=Auth::id();
 
-        $reformes=Reforme::where('user_id',Auth::id())->orderBy('id','desc')->get();
-
-        return $reformes;
+        $req=Reforme::where('user_id',Auth::id())->orderBy('id','desc');
+        if (array_key_exists('per_page', $request->all())) {
+            $per_page = $request['per_page'];
+            return $req->paginate($per_page);
+        } else {
+            return $req->get();
+        }
     }
 
-    public function getByRole()
+    public function getByRole($request)
     {
 
         $idLevel=Auth::id();
 
-        $reformes=Reforme::with(['objectifs.results','affectation','files'])->where('isPublished',false)->whereHas('affectations', function($q) use($idLevel) {
+        $req=Reforme::with(['objectifs.results','affectation','files'])->where('isPublished',false)->whereHas('affectations', function($q) use($idLevel) {
             $q->where('unite_admin_down',"=", $idLevel)->where('isLast',"=", true);
-            })->orderBy('id','desc')->get();
+            })->orderBy('id','desc');
 
-        return $reformes;
-
+            if (array_key_exists('per_page', $request->all())) {
+                $per_page = $request['per_page'];
+                return $req->paginate($per_page);
+            } else {
+                return $req->get();
+            }
 
     }
 

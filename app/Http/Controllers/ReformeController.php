@@ -532,7 +532,7 @@ class ReformeController extends Controller
         $message = 'Suivi des résultats';
 
         try {
-            $result = $this->reformeRepository->getSuiviResult();
+            $result = $this->reformeRepository->getSuiviResult($request);
             $this->ls->trace(['action_name' => $message, 'description' => json_encode($request->all())]);
 
             return Common::success('Suivi des résultats avec succès', $result);
@@ -550,7 +550,7 @@ class ReformeController extends Controller
         $message = 'Liste des enrégistrement';
 
         try {
-            $result = $this->reformeRepository->getMyList();
+            $result = $this->reformeRepository->getMyList($request);
             $this->ls->trace(['action_name' => $message, 'description' => json_encode($request->all())]);
 
             return Common::success('Liste des enrégistrement obtenu avec succès', $result);
@@ -568,7 +568,7 @@ class ReformeController extends Controller
         $message = 'Liste des roles';
 
         try {
-            $result = $this->reformeRepository->getByRole();
+            $result = $this->reformeRepository->getByRole($request);
             $this->ls->trace(['action_name' => $message, 'description' => json_encode($request->all())]);
 
             return Common::success('Liste des roles obtenu avec succès', $result);
