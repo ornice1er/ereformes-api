@@ -727,15 +727,11 @@ class UserAuthController extends Controller
     }
 
 
-    public function saveDb()
+    
+
+            public function saveDatabase()
             {
-               Artisan::call('data:file');
-               Artisan::call('dump:db');
-               return response()->json([
-                "success"=>true,
-                "message"=>"s",
-                "data"=>[]
-            ],200);
+                return $this->userAuthRepository->saveDb();
             }
 
 }

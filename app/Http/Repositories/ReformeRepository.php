@@ -68,27 +68,13 @@ class ReformeRepository
 
         if (array_key_exists('per_page', $request->all())) {
             $per_page = $request['per_page'];
-            return [
-                'success' => true,
-                'data' => $req->paginate($per_page),
-                'message' => "Liste des réformes",
-                'status_code' => 200
-            ];
+            return $req->paginate($per_page);
         } else {
-            return [
-                'success' => true,
-                'data' => $req->get(),
-                'message' => "Liste des réformes",
-                'status_code' => 200
-            ];
+            return $req->get();
         }
 
     } catch (Exception $e) {
-        return [
-            'success' => false,
-            'error' => $e->getMessage(),
-            'status_code' => 500
-        ];
+        return $req->get();
     }
     }
 
@@ -144,25 +130,12 @@ class ReformeRepository
                 'reforme_id' => $reforme->id
             ]);
 
-            return [
-                'success' => true,
-                'data' => $reforme,
-                'message' => "Enregistrement d'un reforme",
-                'status_code' => 200
-            ];
+            return $reforme;
 
         } catch (QueryException $ex) {
-            return [
-                'success' => false,
-                'error' => $ex->getMessage(),
-                'status_code' => 500
-            ];
+            return $ex->getMessage();
         } catch (Exception $e) {
-            return [
-                'success' => false,
-                'error' => $e->getMessage(),
-                'status_code' => 500
-            ];
+            return$e->getMessage();
         }
     }
 
@@ -187,25 +160,12 @@ class ReformeRepository
             // Récupération des données mises à jour
             $reforme = Reforme::find($id);
 
-            return [
-                'success' => true,
-                'data' => $reforme,
-                'message' => "Modification d'un reforme",
-                'status_code' => 200
-            ];
+            return $reforme;
 
         } catch (QueryException $ex) {
-            return [
-                'success' => false,
-                'error' => $ex->getMessage(),
-                'status_code' => 500
-            ];
+            return $ex->getMessage();
         } catch (Exception $e) {
-            return [
-                'success' => false,
-                'error' => $e->getMessage(),
-                'status_code' => 500
-            ];
+            return $e->getMessage();
         }
     }
 
