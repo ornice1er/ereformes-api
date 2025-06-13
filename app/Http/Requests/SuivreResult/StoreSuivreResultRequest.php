@@ -46,7 +46,7 @@ class StoreSuivreResultRequest extends FormRequest
                 'before_or_equal:today',
                 // Contrainte d'unicité : un seul suivi par résultat et par date
                 Rule::unique('suivi_results')->where(function ($query) {
-                    return $query->where('resultat_id', $this->resultat_id);
+                    return $query->where('results_id', $this->results_id);
                 })
             ]
         ];
