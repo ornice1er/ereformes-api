@@ -96,7 +96,7 @@ class AffectationRepository
 {
     $role=Auth::user()->roles()->first()->name;
 
-    if($request->sens==1){
+    if($data['sens']==1){
         switch ($role) {
             case 'publication':
                 $ua_up=Auth::user();
@@ -117,7 +117,7 @@ class AffectationRepository
                     break;
 
             default:
-                return response()->json(["Plus de niveau d'affectation"], 500);
+                return null;
 
                 break;
         }
