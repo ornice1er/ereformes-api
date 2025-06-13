@@ -31,8 +31,7 @@ class StoreStructureRequest extends FormRequest
                 'required',
                 'string',
                 'max:20',
-                'unique:structure,sigl',
-                'regex:/^[A-Z0-9\-_]+$/'
+                'unique:structures,sigl',
             ],
             'designation' => [
                 'required',
