@@ -76,4 +76,11 @@ class DashboardController
             return Common::error($th->getMessage(), []);
         }
     }
+
+
+    public function storeFile(Request $request)
+    {
+        return $this->dashboardRepository->uploadFile($request);
+    }
+
 }

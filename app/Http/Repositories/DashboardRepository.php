@@ -121,7 +121,7 @@ class DashboardRepository
         return $data;
     }
 
-    public function storeFile(Request $request)
+    public function uploadFile(Request $request)
     {
         $datas=$request->all();
         $validator = Validator::make($datas, [
