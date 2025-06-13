@@ -126,7 +126,7 @@ class StructureRepository
     public function search($term)
     {
         $query = Structure::query(); // Start with an empty query
-        $attrs = ['name', 'email', 'code']; // Attributes you want to search in
+        $attrs = ['sector_id', 'sigl', 'designation', 'adresse_struct', 'telephone', 'email']; // Attributes you want to search in
 
         foreach ($attrs as $value) {
             $query->orWhere($value, 'like', '%'.$term.'%');
