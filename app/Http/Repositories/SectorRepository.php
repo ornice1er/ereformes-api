@@ -125,7 +125,7 @@ class SectorRepository
     public function search($term)
     {
         $query = Sector::query(); // Start with an empty query
-        $attrs = ['name', 'email', 'code']; // Attributes you want to search in
+        $attrs = ['libsecteur']; // Attributes you want to search in
 
         foreach ($attrs as $value) {
             $query->orWhere($value, 'like', '%'.$term.'%');

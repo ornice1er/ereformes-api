@@ -26,7 +26,7 @@ class UpdateSectorRequest extends FormRequest
                 'required',
                 'string',
                 'max:100',
-                Rule::unique('sectors', 'libsecteur')->ignore($this->route('sectors')),
+                Rule::unique('sectors', 'libsecteur')->ignore($this->route('secteur')),
             ]
         ];
     }
