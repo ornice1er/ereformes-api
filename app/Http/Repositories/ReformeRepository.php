@@ -196,7 +196,7 @@ class ReformeRepository
     public function search($term)
     {
         $query = Reforme::query(); // Start with an empty query
-        $attrs = ['name', 'email', 'code']; // Attributes you want to search in
+        $attrs = ['structure_id', 'user_id', 'nature_id', 'couverture_id', 'libref', 'typeref', 'objectif_glob', 'popul_cible', 'struct_impl', 'periodexe', 'date_debut', 'date_fin', 'date_enreg', 'cadreinst_mor', 'etat_mor', 'montant_prevu', 'montant_trealise', 'difficult', 'solution', 'perspective', 'isPublished']; // Attributes you want to search in
 
         foreach ($attrs as $value) {
             $query->orWhere($value, 'like', '%'.$term.'%');
