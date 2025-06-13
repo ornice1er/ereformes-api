@@ -34,7 +34,7 @@ class StoreReformeRequest extends FormRequest
             'date_debut' => 'date',
             'date_fin' => 'date|after:date_debut',
             'date_enreg' => 'nullable|date|before_or_equal:today',
-            'cadreinst_mor' => 'string|max:100|min:2',
+            'cadreinst_mor' => 'nullable|string|max:100|min:2',
             'etat_mor' => 'nullable|string|in:EN COURS,TERMINÉ,SUSPENDU,ANNULÉ',
             'montant_prevu' => 'numeric|min:0|max:999999999.99',
             'montant_trealise' => 'nullable|numeric|min:0|max:999999999.99|lte:montant_prevu',
