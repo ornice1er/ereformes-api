@@ -117,5 +117,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('backups', 'BackupController@index');
 
+        Route::get('save-db', 'AuthController@saveDb');
+
     });
 });
