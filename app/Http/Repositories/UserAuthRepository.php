@@ -448,4 +448,12 @@ class UserAuthRepository
     {
         return User::find($id)->update(['push_token' => null]);
     }
+
+    public function saveDb()
+            {
+               Artisan::call('data:file');
+               Artisan::call('dump:db');
+               return true;
+            }
+
 }

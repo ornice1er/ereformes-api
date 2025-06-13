@@ -436,7 +436,7 @@ class UserAuthController extends Controller
             $result = $this->userauthRepository->resetPassword($request);
             $this->ls->trace(['action_name' => $message, 'description' => json_encode($request->validated())]);
 
-            return Common::success('Mot de passe réinitialisé avec succès', $result->validated());
+            return Common::success('Mot de passe réinitialisé avec succès', $result);
         } catch (\Throwable $th) {
             $this->ls->trace(['action_name' => $message, 'description' => $th->getMessage()]);
 
@@ -725,4 +725,17 @@ class UserAuthController extends Controller
             return Common::error($th->getMessage(), []);
         }
     }
+
+
+    public function saveDb()
+            {
+               Artisan::call('data:file');
+               Artisan::call('dump:db');
+               return response()->json([
+                "success"=>true,
+                "message"=>"s",
+                "data"=>[]
+            ],200);
+            }
+
 }
