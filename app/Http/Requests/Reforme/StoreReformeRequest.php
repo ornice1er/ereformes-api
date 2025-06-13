@@ -22,8 +22,7 @@ class StoreReformeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'structure_id' => 'required|integer|exists:structures,id',
-            'user_id' => 'required|integer|exists:users,id',
+           // 'structure_id' => 'integer|exists:structures,id',
             'nature_id' => 'required|integer|exists:natures,id',
             'couverture_id' => 'required|integer|exists:couvertures,id',
             'libref' => 'required|string|max:500|min:10',
@@ -32,12 +31,12 @@ class StoreReformeRequest extends FormRequest
             'popul_cible' => 'required|string|max:500|min:5',
             'struct_impl' => 'required|string|max:500|min:5',
             'periodexe' => 'required|string|max:100|min:5',
-            'date_debut' => 'required|date|after_or_equal:today',
-            'date_fin' => 'required|date|after:date_debut',
+            'date_debut' => 'date|after_or_equal:today',
+            'date_fin' => 'date|after:date_debut',
             'date_enreg' => 'nullable|date|before_or_equal:today',
-            'cadreinst_mor' => 'required|string|max:100|min:2',
+            'cadreinst_mor' => 'string|max:100|min:2',
             'etat_mor' => 'nullable|string|in:EN COURS,TERMINÉ,SUSPENDU,ANNULÉ',
-            'montant_prevu' => 'required|numeric|min:0|max:999999999.99',
+            'montant_prevu' => 'numeric|min:0|max:999999999.99',
             'montant_trealise' => 'nullable|numeric|min:0|max:999999999.99|lte:montant_prevu',
             'difficult' => 'nullable|string|max:2000',
             'solution' => 'nullable|string|max:2000',

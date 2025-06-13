@@ -22,8 +22,7 @@ class UpdateReformeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'structure_id' => 'sometimes|integer|exists:structures,id',
-            'user_id' => 'sometimes|integer|exists:users,id',
+            //'structure_id' => 'sometimes|integer|exists:structures,id',
             'nature_id' => 'sometimes|integer|exists:natures,id',
             'couverture_id' => 'sometimes|integer|exists:couvertures,id',
             'libref' => 'sometimes|string|max:500|min:10',
