@@ -524,6 +524,15 @@ class ReformeController extends Controller
             return Common::error($th->getMessage(), []);
         }
     }
+
+
+    public function getSuiviResult()
+    {
+
+        return $this->reformeRepository->getSuiviResult();
+
+    }
+
 }
 
 

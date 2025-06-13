@@ -4,6 +4,7 @@ namespace App\Http\Repositories;
 use App\Exceptions\JsonResponseException;
 use App\Models\Reforme;
 use App\Models\Media;
+use App\Models\Result;
 use App\Models\Affectation;
 use App\Models\Parcours;
 use App\Traits\Repository;
@@ -218,4 +219,12 @@ class ReformeRepository
 
         return $query->get(); // Return the search results
     }
+
+
+    public function getSuiviResult()
+    {
+        $results=Result::with(['getLastSuiviResult','objectif.reforme.nature','suiviResults'])->get();
+        return $results;
+    }
+
 }
