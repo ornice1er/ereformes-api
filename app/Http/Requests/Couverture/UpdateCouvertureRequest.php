@@ -24,7 +24,7 @@ class UpdateCouvertureRequest extends FormRequest
      */
     public function rules(): array
     {
-                $couvertureId = $this->route('couverture') ? $this->route('couverture')->id : null;
+                $couvertureId = $this->route('couverture') ? $this->route('couverture'): null;
         return [
             'lib_couvert' => [
                 'required',
