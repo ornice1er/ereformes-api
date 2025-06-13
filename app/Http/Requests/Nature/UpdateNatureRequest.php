@@ -30,7 +30,7 @@ class UpdateNatureRequest extends FormRequest
                 'string',
                 'max:500',
                 'min:3',
-                Rule::unique('nature', 'libnature')->ignore($natureId)
+                Rule::unique('natures', 'libnature')->ignore($natureId)
             ],
         ];
     }

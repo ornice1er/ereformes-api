@@ -112,6 +112,7 @@ class SectorController extends Controller
     {
         $message = 'Récupération de la liste des sectors';
 
+
         try {
             $result = $this->sectorRepository->getAll($request);
             $this->ls->trace(['action_name' => $message, 'description' => json_encode($request->all())]);
@@ -244,15 +245,16 @@ class SectorController extends Controller
      */
     public function store(StoreSectorRequest $request)
     {
+
         $message = 'Enregistrement d\'un sector';
 
         try {
             $result = $this->sectorRepository->makeStore($request->validated());
             $this->ls->trace(['action_name' => $message, 'description' => json_encode($request->validated())]);
 
-            return Common::successCreate('Utilisateur créé avec succès', $result);
+            return Common::successCreate('Secteur créé avec succès', $result);
         } catch (\Throwable $th) {
-            $this->ls->trace(['action_name' => $message, 'description' => $th->getMessage()]);
+           $this->ls->trace(['action_name' => $message, 'description' => $th->getMessage()]);
 
             return Common::error($th->getMessage(), []);
         }

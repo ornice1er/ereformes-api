@@ -22,7 +22,7 @@ class StoreNatureRequest extends FormRequest
     public function rules(): array
     {
          return [
-            'libnature' => 'required|string|max:500|min:3|unique:nature,libnature',
+            'libnature' => 'required|string|max:500|min:3|unique:natures,libnature',
         ];
 
     }

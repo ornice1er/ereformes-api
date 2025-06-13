@@ -30,7 +30,7 @@ class UpdateCouvertureRequest extends FormRequest
                 'required',
                 'string',
                 'max:100',
-                'unique:couverture,lib_couvert,' . $couvertureId
+                'unique:couvertures,lib_couvert,' . $couvertureId
             ],
         ];
     }

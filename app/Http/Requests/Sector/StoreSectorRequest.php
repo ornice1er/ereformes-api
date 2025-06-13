@@ -26,7 +26,7 @@ class StoreSectorRequest extends FormRequest
                 'required',
                 'string',
                 'max:100',
-                'unique:secteur,libsecteur',
+                'unique:sectors,libsecteur',
             ]
         ];
     }

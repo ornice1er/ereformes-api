@@ -74,7 +74,6 @@ class SectorRepository
   public function makeStore(array $data): Sector
 {
 
-
     // Création de l'sector
     $sector = Sector::create($data);
 

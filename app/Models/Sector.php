@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class Sector extends Model
 {
     use HasFactory, Filterable;
+
+    protected $table = 'sectors';
     protected $guarded = [];
     public $timestamps = false;
 

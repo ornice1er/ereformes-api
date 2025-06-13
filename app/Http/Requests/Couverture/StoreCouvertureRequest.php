@@ -29,7 +29,7 @@ class StoreCouvertureRequest extends FormRequest
                 'required',
                 'string',
                 'max:100',
-                'unique:couverture,lib_couvert'
+                'unique:couvertures,lib_couvert'
             ],
         ];
     }

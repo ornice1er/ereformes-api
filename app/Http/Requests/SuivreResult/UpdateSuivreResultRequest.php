@@ -27,7 +27,7 @@ class UpdateSuivreResultRequest extends FormRequest
                 'sometimes',
                 'integer',
                 'min:1',
-                'exists:resultat,id'
+                'exists:results,id'
             ],
             'taux_realisat' => [
                 'sometimes',
@@ -45,12 +45,12 @@ class UpdateSuivreResultRequest extends FormRequest
                 'date',
                 'before_or_equal:today',
                 // Contrainte d'unicité en excluant l'enregistrement actuel
-                Rule::unique('suivre_result')->where(function ($query) {
-                    if ($this->has('resultat_id')) {
-                        return $query->where('resultat_id', $this->resultat_id);
+                Rule::unique('suivi_results')->where(function ($query) {
+                    if ($this->has('results_id')) {
+                        return $query->where('results_id', $this->results_id);
                     }
                     return $query;
-                })->ignore($this->route('suivre_result'))
+                })->ignore($this->route('suivi_results'))
             ]
         ];
     }

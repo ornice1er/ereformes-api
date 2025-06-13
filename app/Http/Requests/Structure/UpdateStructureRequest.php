@@ -26,7 +26,7 @@ class UpdateStructureRequest extends FormRequest
             'sector_id' => [
                 'required',
                 'integer',
-                'exists:secteur,id'
+                'exists:sectors,id'
             ],
             'sigl' => [
                 'required',

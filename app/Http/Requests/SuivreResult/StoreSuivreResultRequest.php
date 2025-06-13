@@ -27,7 +27,7 @@ class StoreSuivreResultRequest extends FormRequest
                 'required',
                 'integer',
                 'min:1',
-                'exists:resultat,id'
+                'exists:results,id'
             ],
             'taux_realisat' => [
                 'required',
@@ -45,7 +45,7 @@ class StoreSuivreResultRequest extends FormRequest
                 'date',
                 'before_or_equal:today',
                 // Contrainte d'unicité : un seul suivi par résultat et par date
-                Rule::unique('suivre_result')->where(function ($query) {
+                Rule::unique('suivi_results')->where(function ($query) {
                     return $query->where('resultat_id', $this->resultat_id);
                 })
             ]
