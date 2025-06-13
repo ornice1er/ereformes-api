@@ -92,12 +92,6 @@ class NatureRepository
             // Récupération des données mises à jour
             $nature = Nature::find($id);
 
-            return [
-                'success' => true,
-                'data' => $nature,
-                'message' => "Modification d'un nature",
-                'status_code' => 200
-            ];
 
             return $nature;
 
