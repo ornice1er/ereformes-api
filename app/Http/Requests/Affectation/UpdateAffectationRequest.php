@@ -25,10 +25,7 @@ class UpdateAffectationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'isLast' => 'sometimes|boolean',
             'reforme_id' => 'sometimes|integer|exists:reformes,id',
-            'unite_admin_up' => 'sometimes|integer',
-            'unite_admin_down' => 'sometimes|integer',
             'sens' => 'sometimes|in:0,1',
             'instruction' => 'nullable|string',
             'delay' => 'nullable|integer',

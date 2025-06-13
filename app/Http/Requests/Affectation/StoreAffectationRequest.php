@@ -25,13 +25,8 @@ class StoreAffectationRequest extends FormRequest
     public function rules(): array
     {
          return [
-            'isLast' => 'required|boolean',
             'reforme_id' => 'required|integer|exists:reformes,id',
-            'unite_admin_up' => 'required|integer',
-            'unite_admin_down' => 'required|integer',
             'sens' => 'required|in:0,1',
-            'created_at' => 'nullable|date',
-            'updated_at' => 'nullable|date',
             'instruction' => 'nullable|string',
             'delay' => 'nullable|integer'
         ];
