@@ -92,7 +92,7 @@ class AffectationRepository
     /**
      * Store a new affectation
      */
-  public function makeStore(array $data): Affectation
+  public function makeStore(array $data)
 {
     $role=Auth::user()->roles()->first()->name;
 
