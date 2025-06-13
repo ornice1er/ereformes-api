@@ -32,8 +32,7 @@ class UpdateStructureRequest extends FormRequest
                 'required',
                 'string',
                 'max:20',
-                Rule::unique('structure', 'sigl')->ignore($this->route('structure')),
-                'regex:/^[A-Z0-9\-_]+$/'
+                Rule::unique('structures', 'sigl')->ignore($this->route('structure')),
             ],
             'designation' => [
                 'required',
