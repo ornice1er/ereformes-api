@@ -59,7 +59,7 @@ return new class extends Migration
             $table->index('nature_id');
             $table->index('couverture_id');
             $table->index('etat_mor');
-            $table->index('isPublished');
+            $table->index('isPublished')->default(true);
             $table->index(['date_debut', 'date_fin']);
 
              // Contraintes de clés étrangères

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('affectations', function (Blueprint $table) {
             $table->id();
-            $table->boolean('isLast')->default(false)->comment('Indique si c\'est la dernière affectation');
+            $table->boolean('isLast')->default(true)->comment('Indique si c\'est la dernière affectation');
             $table->unsignedBigInteger('reforme_id')->comment('ID de la réforme');
             $table->unsignedBigInteger('unite_admin_up')->comment('Unité administrative supérieure');
             $table->unsignedBigInteger('unite_admin_down')->comment('Unité administrative inférieure');
