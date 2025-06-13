@@ -74,68 +74,16 @@ class NatureRepository
      */
     public function makeStore(array $data)
     {
-        try {
-            // Validation des données
-            $validator = Validator::make($data, [
-                "libnature" => "required|unique:nature"
-            ],
-            [
-                'libnature.required' => 'Le libellé est requis',
-                'libnature.unique' => 'Le libellé doit être unique',
-            ]);
-
-            if ($validator->fails()) {
-                return [
-                    'success' => false,
-                    'errors' => $validator->errors(),
-                    'status_code' => 500
-                ];
-            }
 
             // Création de la nature
             $nature = Nature::create($data);
 
-            return [
-                'success' => true,
-                'data' => $nature,
-                'message' => "Enregistrement d'un nature",
-                'status_code' => 200
-            ];
+            return $nature;
 
-        } catch (QueryException $ex) {
-            return [
-                'success' => false,
-                'error' => $ex->getMessage(),
-                'status_code' => 500
-            ];
-        } catch (Exception $e) {
-            return [
-                'success' => false,
-                'error' => $e->getMessage(),
-                'status_code' => 500
-            ];
-        }
     }
 
     public function makeUpdate($id, array $data)
     {
-        try {
-            // Validation des données avec exclusion de l'ID actuel pour la règle unique
-            $validator = Validator::make($data, [
-                "libnature" => "required|unique:nature,libnature," . $id
-            ],
-            [
-                'libnature.required' => 'Le libellé est requis',
-                'libnature.unique' => 'Le libellé doit être unique',
-            ]);
-
-            if ($validator->fails()) {
-                return [
-                    'success' => false,
-                    'errors' => $validator->errors(),
-                    'status_code' => 500
-                ];
-            }
 
             // Recherche et mise à jour de la nature
             $nature = Nature::findOrFail($id);
@@ -151,19 +99,8 @@ class NatureRepository
                 'status_code' => 200
             ];
 
-        } catch (QueryException $ex) {
-            return [
-                'success' => false,
-                'error' => $ex->getMessage(),
-                'status_code' => 500
-            ];
-        } catch (Exception $e) {
-            return [
-                'success' => false,
-                'error' => $e->getMessage(),
-                'status_code' => 500
-            ];
-        }
+            return $nature;
+
     }
 
 
