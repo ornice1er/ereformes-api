@@ -3,6 +3,7 @@
 namespace App\Http\Repositories;
 use App\Exceptions\JsonResponseException;
 use App\Models\Reforme;
+use App\Models\Media;
 use App\Models\Affectation;
 use App\Models\Parcours;
 use App\Traits\Repository;

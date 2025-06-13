@@ -6,6 +6,7 @@ use App\Models\Media;
 use App\Models\Reforme;
 use App\Traits\Repository;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 
 class DashboardRepository
 {

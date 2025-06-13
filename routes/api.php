@@ -67,7 +67,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('/dash', 'DashboardController@getDash');
         Route::get('dash/{role}', 'DashboardController@index');
-        Route::post('files', 'DashboardController@storeFile');
+        Route::post('files', 'FileController@storeFile');
 
 
         Route::post('send-otp', 'OtpController@sendOTP');

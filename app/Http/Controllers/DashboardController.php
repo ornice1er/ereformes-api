@@ -80,7 +80,7 @@ class DashboardController
 
     public function storeFile(Request $request)
     {
-        return $this->dashboardRepository->uploadFile($request);
+        return $this->dashRepository->uploadFile($request);
     }
 
 }
