@@ -580,6 +580,41 @@ class ReformeController extends Controller
 
 
     }
+    public function publish(Request $request,$id)
+    {
+
+        $message = 'Publier une réforme';
+      //  try {
+            $result = $this->reformeRepository->publish($id);
+            $this->ls->trace(['action_name' => $message, 'description' => json_encode($request->all())]);
+
+            return Common::success('Publication de réforme avec succès', $result);
+        // } catch (\Throwable $th) {
+        //     $this->ls->trace(['action_name' => $message, 'description' => $th->getMessage()]);
+
+        //     return Common::error($th->getMessage(), []);
+        // }
+
+
+    }
+    public function unpublish(Request $request,$id)
+    {
+
+        $message = 'Arrêter de publier une réforme';
+
+        try {
+            $result = $this->reformeRepository->unpublish($id);
+            $this->ls->trace(['action_name' => $message, 'description' => json_encode($request->all())]);
+
+            return Common::success('Liste des roles obtenu avec succès', $result);
+        } catch (\Throwable $th) {
+            $this->ls->trace(['action_name' => $message, 'description' => $th->getMessage()]);
+
+            return Common::error($th->getMessage(), []);
+        }
+
+
+    }
 
 }
 

@@ -267,4 +267,23 @@ class ReformeRepository
 
     }
 
+
+       public function publish($id)
+    {
+        $reforme=Reforme::find($id);
+        $reforme->affectation?->update(['isLast'=>true]);
+        $reforme->update(['isPublished'=>true]);
+
+        return [];
+    }
+
+    public function unpublish($id)
+    {
+        $reforme=Reforme::find($id);
+       if($reforme->affectation) $reforme->affectation->update(['isLast'=>false]);
+        $reforme->update(['isPublished'=>false]);
+
+        return [];
+    }
+
 }
