@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 13 juin 2025 à 08:47
+-- Généré le : lun. 16 juin 2025 à 13:59
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.2.0
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `affectations` (
   KEY `affectations_reforme_id_islast_index` (`reforme_id`,`isLast`),
   KEY `affectations_unite_admin_up_unite_admin_down_index` (`unite_admin_up`,`unite_admin_down`),
   KEY `affectations_unite_admin_down_foreign` (`unite_admin_down`)
-) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `affectations`
@@ -186,7 +186,8 @@ INSERT INTO `affectations` (`id`, `isLast`, `reforme_id`, `unite_admin_up`, `uni
 (139, 1, 321, 93, 93, 1, NULL, NULL, '2025-04-23 15:05:52', '2025-04-23 15:05:52'),
 (140, 1, 322, 93, 93, 1, NULL, NULL, '2025-04-23 15:09:44', '2025-04-23 15:09:44'),
 (141, 1, 323, 93, 93, 1, NULL, NULL, '2025-04-23 15:12:26', '2025-04-23 15:12:26'),
-(142, 1, 324, 93, 93, 1, NULL, NULL, '2025-04-23 16:04:40', '2025-04-23 16:04:40');
+(142, 1, 324, 93, 93, 1, NULL, NULL, '2025-04-23 16:04:40', '2025-04-23 16:04:40'),
+(146, 0, 330, 8, 8, 1, NULL, NULL, '2025-06-13 13:51:45', '2025-06-13 13:51:45');
 
 -- --------------------------------------------------------
 
@@ -254,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `couvertures` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `couvertures_lib_couvert_unique` (`lib_couvert`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `couvertures`
@@ -263,7 +264,9 @@ CREATE TABLE IF NOT EXISTS `couvertures` (
 INSERT INTO `couvertures` (`id`, `lib_couvert`, `created_at`, `updated_at`) VALUES
 (1, 'Nationale', NULL, NULL),
 (2, 'Régionale', NULL, NULL),
-(3, 'Communale', NULL, NULL);
+(3, 'Communale', NULL, NULL),
+(4, 'TestCouvert', NULL, NULL),
+(5, 'TestCouverture', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -280,7 +283,14 @@ CREATE TABLE IF NOT EXISTS `entite_admins` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `entite_admins_libelle_unique` (`libelle`),
   KEY `entite_admins_libelle_index` (`libelle`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `entite_admins`
+--
+
+INSERT INTO `entite_admins` (`id`, `libelle`, `created_at`, `updated_at`) VALUES
+(1, 'test', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -336,7 +346,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `logs`
@@ -368,7 +378,39 @@ INSERT INTO `logs` (`id`, `action_name`, `description`, `done_by`, `origin`, `cr
 (23, 'Récupération de la liste des structures', '[]', 8, 'AUTH', '2025-06-12 16:06:08', '2025-06-12 16:06:08'),
 (24, 'Récupération de la liste des reformes', '[]', 8, 'AUTH', '2025-06-13 07:43:29', '2025-06-13 07:43:29'),
 (25, 'Récupération de la liste des structures', '[]', 8, 'AUTH', '2025-06-13 07:44:08', '2025-06-13 07:44:08'),
-(26, 'Récupération de la liste des sectors', '[]', 8, 'AUTH', '2025-06-13 07:45:26', '2025-06-13 07:45:26');
+(26, 'Récupération de la liste des sectors', '[]', 8, 'AUTH', '2025-06-13 07:45:26', '2025-06-13 07:45:26'),
+(27, 'Récupération de la liste des affectation', '[]', 8, 'AUTH', '2025-06-13 08:54:57', '2025-06-13 08:54:57'),
+(28, 'Récupération de la liste des EntiteAdmins', '[]', 8, 'AUTH', '2025-06-13 09:04:01', '2025-06-13 09:04:01'),
+(29, 'Récupération de la liste des couvertures', '[]', 8, 'AUTH', '2025-06-13 09:32:18', '2025-06-13 09:32:18'),
+(30, 'Récupération de la liste des natures', '[]', 8, 'AUTH', '2025-06-13 09:42:36', '2025-06-13 09:42:36'),
+(31, 'Récupération de la liste des objectifs', '[]', 8, 'AUTH', '2025-06-13 09:44:30', '2025-06-13 09:44:30'),
+(32, 'Récupération de la liste des results', '[]', 8, 'AUTH', '2025-06-13 09:49:42', '2025-06-13 09:49:42'),
+(33, 'Récupération de la liste des SuivreResults', '[]', 8, 'AUTH', '2025-06-13 09:51:05', '2025-06-13 09:51:05'),
+(34, 'Recupération de la liste des Notification', '[]', 8, 'AUTH', '2025-06-13 09:52:09', '2025-06-13 09:52:09'),
+(35, 'Récupération de la liste des utilisateurs', '[]', 8, 'AUTH', '2025-06-13 09:53:02', '2025-06-13 09:53:02'),
+(36, 'Récupération de la liste des rôles', '[]', 8, 'AUTH', '2025-06-13 09:56:25', '2025-06-13 09:56:25'),
+(37, 'Récupération de la liste des permissions', '[]', 8, 'AUTH', '2025-06-13 09:58:00', '2025-06-13 09:58:00'),
+(38, 'Récupération de la liste des sectors', 'You must set libsecteur in whiteListFilter in Sector\n         or create an override method with name libsecteur or call ignoreRequest method for ignore libsecteur.', 8, 'AUTH', '2025-06-13 10:00:57', '2025-06-13 10:00:57'),
+(39, 'Enregistrement d\'un sector', 'App\\Http\\Repositories\\SectorRepository::makeStore(): Return value must be of type App\\Models\\Sector, string returned', 8, 'AUTH', '2025-06-13 10:44:30', '2025-06-13 10:44:30'),
+(40, 'Enregistrement d\'un sector', '{\"libsecteur\":\"TestSector\"}', 8, 'AUTH', '2025-06-13 10:45:11', '2025-06-13 10:45:11'),
+(41, 'Enregistrement d\'un couverture', '{\"lib_couvert\":\"TestCouvert\"}', 8, 'AUTH', '2025-06-13 11:01:54', '2025-06-13 11:01:54'),
+(42, 'Enregistrement d\'un couverture', '{\"lib_couvert\":\"TestCouverture\"}', 8, 'AUTH', '2025-06-13 11:02:48', '2025-06-13 11:02:48'),
+(43, 'Récupération de la liste des sectors', '[]', 8, 'AUTH', '2025-06-13 11:05:03', '2025-06-13 11:05:03'),
+(44, 'Mise à jour d\'un sector', '{\"libsecteur\":\"Test\"}', 8, 'AUTH', '2025-06-13 11:05:34', '2025-06-13 11:05:34'),
+(45, 'Enregistrement d\'un structure', '{\"sector_id\":\"10\",\"sigl\":\"TET\",\"designation\":\"Test En Tout\",\"adresse_struct\":\"cadjehoun, gars\",\"telephone\":\"0166000014\",\"email\":\"test1@example.bj\"}', 8, 'AUTH', '2025-06-13 11:18:37', '2025-06-13 11:18:37'),
+(46, 'Mise à jour d\'un structure', '{\"sector_id\":\"10\",\"sigl\":\"TETE\",\"designation\":\"Test Enrichie Tronqu\\u00e9\",\"adresse_struct\":\"cadjehoun, gars\",\"telephone\":\"0166000014\",\"email\":\"test1@example.bj\"}', 8, 'AUTH', '2025-06-13 11:26:38', '2025-06-13 11:26:38'),
+(47, 'Enregistrement d\'un utilisateur', 'Connection could not be established with host \"mailpit:1025\": stream_socket_client(): php_network_getaddresses: getaddrinfo for mailpit failed: H�te inconnu. ', 8, 'AUTH', '2025-06-13 11:45:28', '2025-06-13 11:45:28'),
+(48, 'Enregistrement d\'un utilisateur', '{\"email\":\"marie@gouv.bj\",\"firstname\":\"Marie-Claire\",\"lastname\":\"Kokou\",\"birthdate\":\"1985-03-15\",\"birthplace\":\"Abidjan\",\"address\":\"Rue des Palmiers, Quartier Zongo, Cotonou\",\"phone\":\"97834567\"}', 8, 'AUTH', '2025-06-13 11:58:04', '2025-06-13 11:58:04'),
+(49, 'Mise à jour d\'un utilisateur', '{\"email\":\"marie@gouv.bj\",\"firstname\":\"Marie-Claire\",\"lastname\":\"Kouadjo\",\"birthdate\":\"1985-03-15\",\"birthplace\":\"yamsoukro\",\"address\":\"Rue des Palmiers, Quartier Zongo, Cotonou\",\"phone\":\"97834567\"}', 8, 'AUTH', '2025-06-13 11:59:45', '2025-06-13 11:59:45'),
+(50, 'Récupération de la liste des natures', '[]', 8, 'AUTH', '2025-06-13 12:58:07', '2025-06-13 12:58:07'),
+(51, 'Récupération de la liste des structures', '[]', 8, 'AUTH', '2025-06-13 12:59:00', '2025-06-13 12:59:00'),
+(52, 'Enregistrement d\'un reforme', 'Class \"App\\Http\\Repositories\\Affectation\" not found', 8, 'AUTH', '2025-06-13 13:00:31', '2025-06-13 13:00:31'),
+(53, 'Déconnexion de l\'utilisateur', '[]', 8, 'AUTH', '2025-06-13 13:19:26', '2025-06-13 13:19:26'),
+(54, 'Enregistrement d\'un reforme', 'Class \"App\\Http\\Repositories\\Affectation\" not found', 8, 'AUTH', '2025-06-13 13:29:54', '2025-06-13 13:29:54'),
+(55, 'Enregistrement d\'un reforme', '{\"structure_id\":1,\"user_id\":170,\"nature_id\":4,\"couverture_id\":1,\"libref\":\"Modernisation du syst\\u00e8me de gestion documentaire\",\"typeref\":\"R\\u00e9forme structurelle\",\"objectif_glob\":\"Am\\u00e9liorer l\'efficacit\\u00e9 et la transparence dans la gestion des documents administratifs en digitalisant les processus existants\",\"popul_cible\":\"Fonctionnaires et usagers des services publics\",\"struct_impl\":\"Direction G\\u00e9n\\u00e9rale de la Modernisation de l\'Administration\",\"periodexe\":\"24 mois\",\"date_debut\":\"2025-07-01\",\"date_fin\":\"2027-06-30\",\"date_enreg\":\"2025-06-13\",\"cadreinst_mor\":\"D\\u00e9cret pr\\u00e9sidentiel n\\u00b02025-123 du 15 mai 2025\",\"etat_mor\":\"EN COURS\",\"montant_prevu\":250000000,\"montant_trealise\":0,\"difficult\":\"R\\u00e9sistance au changement de certains agents, contraintes budg\\u00e9taires\",\"solution\":\"Formation du personnel, d\\u00e9ploiement progressif par phases, sensibilisation\",\"perspective\":\"Extension \\u00e0 d\'autres minist\\u00e8res, int\\u00e9gration avec le syst\\u00e8me national d\'archivage\",\"isPublished\":false}', 8, 'AUTH', '2025-06-13 13:34:05', '2025-06-13 13:34:05'),
+(56, 'Récupération de la liste des EntiteAdmins', '[]', 8, 'AUTH', '2025-06-13 13:35:50', '2025-06-13 13:35:50'),
+(57, 'Enregistrement d\'un reforme', '{\"structure_id\":1,\"user_id\":170,\"nature_id\":4,\"couverture_id\":1,\"libref\":\"Modernisation du syst\\u00e8me de gestion documentaire\",\"typeref\":\"R\\u00e9forme structurelle\",\"objectif_glob\":\"Am\\u00e9liorer l\'efficacit\\u00e9 et la transparence dans la gestion des documents administratifs en digitalisant les processus existants\",\"popul_cible\":\"Fonctionnaires et usagers des services publics\",\"struct_impl\":\"Direction G\\u00e9n\\u00e9rale de la Modernisation de l\'Administration\",\"periodexe\":\"24 mois\",\"date_debut\":\"2025-07-01\",\"date_fin\":\"2027-06-30\",\"date_enreg\":\"2025-06-13\",\"cadreinst_mor\":\"D\\u00e9cret pr\\u00e9sidentiel n\\u00b02025-123 du 15 mai 2025\",\"etat_mor\":\"EN COURS\",\"montant_prevu\":250000000,\"montant_trealise\":0,\"difficult\":\"R\\u00e9sistance au changement de certains agents, contraintes budg\\u00e9taires\",\"solution\":\"Formation du personnel, d\\u00e9ploiement progressif par phases, sensibilisation\",\"perspective\":\"Extension \\u00e0 d\'autres minist\\u00e8res, int\\u00e9gration avec le syst\\u00e8me national d\'archivage\",\"isPublished\":false}', 8, 'AUTH', '2025-06-13 13:37:07', '2025-06-13 13:37:07'),
+(59, 'Enregistrement d\'un reforme', '{\"structure_id\":1,\"user_id\":170,\"nature_id\":4,\"couverture_id\":1,\"libref\":\"Modernisation du syst\\u00e8me de gestion documentaire\",\"typeref\":\"R\\u00e9forme structurelle\",\"objectif_glob\":\"Am\\u00e9liorer l\'efficacit\\u00e9 et la transparence dans la gestion des documents administratifs en digitalisant les processus existants\",\"popul_cible\":\"Fonctionnaires et usagers des services publics\",\"struct_impl\":\"Direction G\\u00e9n\\u00e9rale de la Modernisation de l\'Administration\",\"periodexe\":\"24 mois\",\"date_debut\":\"2025-07-01\",\"date_fin\":\"2027-06-30\",\"date_enreg\":\"2025-06-13\",\"cadreinst_mor\":\"D\\u00e9cret pr\\u00e9sidentiel n\\u00b02025-123 du 15 mai 2025\",\"etat_mor\":\"EN COURS\",\"montant_prevu\":250000000,\"montant_trealise\":0,\"difficult\":\"R\\u00e9sistance au changement de certains agents, contraintes budg\\u00e9taires\",\"solution\":\"Formation du personnel, d\\u00e9ploiement progressif par phases, sensibilisation\",\"perspective\":\"Extension \\u00e0 d\'autres minist\\u00e8res, int\\u00e9gration avec le syst\\u00e8me national d\'archivage\",\"isPublished\":false}', 8, 'AUTH', '2025-06-13 13:51:45', '2025-06-13 13:51:45');
 
 -- --------------------------------------------------------
 
@@ -379,14 +421,14 @@ INSERT INTO `logs` (`id`, `action_name`, `description`, `done_by`, `origin`, `cr
 DROP TABLE IF EXISTS `media`;
 CREATE TABLE IF NOT EXISTS `media` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `projets_media_id` bigint UNSIGNED NOT NULL,
+  `projets_media_id` bigint UNSIGNED DEFAULT NULL,
   `chemin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `media_projets_media_id_index` (`projets_media_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1177 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1178 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `media`
@@ -1233,7 +1275,8 @@ INSERT INTO `media` (`id`, `projets_media_id`, `chemin`, `name`, `created_at`, `
 (1173, 0, 'https://reformesbenin.gouv.bj/backend/storage/reformes-docs/241024115004.pdf', '241024115004.pdf', NULL, NULL),
 (1174, 0, 'https://reformesbenin.gouv.bj/backend/storage/reformes-docs/241024120122.pdf', '241024120122.pdf', NULL, NULL),
 (1175, 301, 'https://reformesbenin.gouv.bj/backend/storage/reformes-docs/241024121352.pdf', '241024121352.pdf', NULL, NULL),
-(1176, 320, 'https://reformesbenin.gouv.bj/backend/storage/reformes-docs/250106115051.pdf', '250106115051.pdf', NULL, NULL);
+(1176, 320, 'https://reformesbenin.gouv.bj/backend/storage/reformes-docs/250106115051.pdf', '250106115051.pdf', NULL, NULL),
+(1177, NULL, 'http://localhost/storage/reformes-docs/250613034901.jpeg', '250613034901.jpeg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1665,7 +1708,7 @@ CREATE TABLE IF NOT EXISTS `parcours` (
   PRIMARY KEY (`id`),
   KEY `parcours_reforme_id_index` (`reforme_id`),
   KEY `parcours_libelle_index` (`libelle`)
-) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `parcours`
@@ -1812,7 +1855,8 @@ INSERT INTO `parcours` (`id`, `libelle`, `reforme_id`, `created_at`, `updated_at
 (138, 'Création de la réforme', 321, '2025-04-23 15:05:52', '2025-04-23 15:05:52'),
 (139, 'Création de la réforme', 322, '2025-04-23 15:09:44', '2025-04-23 15:09:44'),
 (140, 'Création de la réforme', 323, '2025-04-23 15:12:26', '2025-04-23 15:12:26'),
-(141, 'Création de la réforme', 324, '2025-04-23 16:04:40', '2025-04-23 16:04:40');
+(141, 'Création de la réforme', 324, '2025-04-23 16:04:40', '2025-04-23 16:04:40'),
+(142, 'Création de la réforme', 330, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1985,7 +2029,7 @@ CREATE TABLE IF NOT EXISTS `reformes` (
   KEY `reformes_etat_mor_index` (`etat_mor`),
   KEY `reformes_ispublished_index` (`isPublished`),
   KEY `reformes_date_debut_date_fin_index` (`date_debut`,`date_fin`)
-) ENGINE=InnoDB AUTO_INCREMENT=325 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=331 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `reformes`
@@ -2205,7 +2249,8 @@ INSERT INTO `reformes` (`id`, `structure_id`, `user_id`, `nature_id`, `couvertur
 (321, 28, 93, 1, 1, 'Reforme relative au renforcement de l’infrastructure qualité', 'SECTORIELLE', '-	Mutualiser les moyens -	Rationaliser les ressources  -	Améliorer la visibilité et l’efficacité de l’infrastructure qualité', 'ENTREPRISES', 'ANM', 'Du 1-0-2016 au 23-0-2017', '2016-01-01', '2017-01-23', '2025-04-23', '', '', '0.00', '0.00', NULL, NULL, NULL, 0, NULL, NULL),
 (322, 28, 93, 1, 1, 'Dématérialisation de la procédure de délivrance des certificats d’origine', 'SECTORIELLE', 'Réduire le délai de délivrance', 'ENTREPRISES', 'DDI', 'Du 1-0-2016 au 1-0-2017', '2016-01-01', '2017-01-01', '2025-04-23', '', '', '0.00', '0.00', NULL, NULL, NULL, 0, NULL, NULL),
 (323, 28, 93, 1, 1, 'Dématérialisation de la procédure de délivrance des autorisations d’installation industrielle', 'SECTORIELLE', 'Réduire le délai de délivrance', 'ENTREPRISES et usagers', 'DDI', 'Du 1-0-2016 au 1-0-2017', '2016-01-01', '2017-01-01', '2025-04-23', '', '', '0.00', '0.00', NULL, NULL, NULL, 0, NULL, NULL),
-(324, 28, 93, 1, 1, 'Reforme relative à la fabrication et à l\'importation du tabac, ses dérivés et assimilés en République du Bénin', 'SECTORIELLE', 'Fixer les conditions et modalités de délivrance des agréments de fabrication et d\'importation du tabac, ses dérivés et assimilés', 'ENTREPRISES', 'DCI', 'Du 1-0-2016 au 9-1-2022', '2016-01-01', '2022-02-09', '2025-04-23', '', '', '0.00', '0.00', NULL, NULL, NULL, 0, NULL, NULL);
+(324, 28, 93, 1, 1, 'Reforme relative à la fabrication et à l\'importation du tabac, ses dérivés et assimilés en République du Bénin', 'SECTORIELLE', 'Fixer les conditions et modalités de délivrance des agréments de fabrication et d\'importation du tabac, ses dérivés et assimilés', 'ENTREPRISES', 'DCI', 'Du 1-0-2016 au 9-1-2022', '2016-01-01', '2022-02-09', '2025-04-23', '', '', '0.00', '0.00', NULL, NULL, NULL, 0, NULL, NULL),
+(330, 1, 8, 4, 1, 'Modernisation du système de gestion documentaire', 'Réforme structurelle', 'Améliorer l\'efficacité et la transparence dans la gestion des documents administratifs en digitalisant les processus existants', 'Fonctionnaires et usagers des services publics', 'Direction Générale de la Modernisation de l\'Administration', '24 mois', '2025-07-01', '2027-06-30', '2025-06-13', 'Décret présidentiel n°2025-123 du 15 mai 2025', 'EN COURS', '250000000.00', '0.00', 'Résistance au changement de certains agents, contraintes budgétaires', 'Formation du personnel, déploiement progressif par phases, sensibilisation', 'Extension à d\'autres ministères, intégration avec le système national d\'archivage', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2433,7 +2478,7 @@ CREATE TABLE IF NOT EXISTS `sectors` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `sectors_libsecteur_unique` (`libsecteur`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `sectors`
@@ -2447,7 +2492,8 @@ INSERT INTO `sectors` (`id`, `libsecteur`, `created_at`, `updated_at`) VALUES
 (5, 'SOUTIEN AU DEVELOPPEMENT ECONOMIQUE', NULL, NULL),
 (6, 'SOCIAL ET ENVIRONNEMENTALE', NULL, NULL),
 (7, 'PLANIFICATION ET FINANCE', NULL, NULL),
-(9, 'FONCTION PUBLIQUE', NULL, NULL);
+(9, 'FONCTION PUBLIQUE', NULL, NULL),
+(10, 'Test', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2503,7 +2549,7 @@ CREATE TABLE IF NOT EXISTS `structures` (
   UNIQUE KEY `structures_sigl_unique` (`sigl`),
   KEY `structures_sector_id_index` (`sector_id`),
   KEY `structures_sigl_index` (`sigl`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `structures`
@@ -2519,7 +2565,7 @@ INSERT INTO `structures` (`id`, `sector_id`, `sigl`, `designation`, `adresse_str
 (7, 1, 'MJL', 'MINISTERE DE LA JUSTICE ET DE LA LEGISLATION', 'COTONOU, Quartier CADJEHOUN', '21 30 25 94', '', NULL, NULL),
 (8, 4, 'MAEP', 'MINISTERE DE L\'AGRICULTURE DE L\'ELEVAGE ET DE LA PECHE', 'CADJEHOUN', '°°°°°°°°°°', '', NULL, NULL),
 (9, 3, 'MEMP', 'MINISTERE DES ENSEIGNEMENTS MATERNEL ET PRIMAIRE', 'Porto-Novo, Quartier Oganla', '64555555555', '', NULL, NULL),
-(10, 3, 'MESFTP', 'MINISTERE DES ENSEIGNEMENTS SECONDAIRE, DE LA FORMATION TECHNIQUE ET PROFESSIONNELLE', 'CADJEHOUN COTONOU', '21307755', '', NULL, NULL),
+(10, 10, 'TETE', 'Test Enrichie Tronqué', 'cadjehoun, gars', '0166000014', 'test1@example.bj', NULL, NULL),
 (11, 5, 'CS', 'COUR SUPRÊME', 'PORTO-NOVO (01 BP: 330 RP COTONOU)', '(229) 20-21-26-77/20', '', NULL, NULL),
 (12, 2, 'DGRE', 'DIRECTION GENERALE DE LA REFORME DE LETAT', 'BP907Cotonou', '95969119', '', NULL, NULL),
 (13, 4, 'MCVDD', 'MINISTERE DU CADRE DE VIE ET DU DEVELOPPEMENT DURABLE', 'cotonou', '21315058', '', NULL, NULL),
@@ -2555,7 +2601,8 @@ INSERT INTO `structures` (`id`, `sector_id`, `sigl`, `designation`, `adresse_str
 (48, 2, 'PRECOUFFO', 'Préfecture du COUFFO', 'NEANT', 'NÉANT', '', NULL, NULL),
 (49, 2, 'PREATLANTIQUE', 'Préfecture de l\'ATLANTIQUE', 'NEANT', 'NÉANT', '', NULL, NULL),
 (50, 2, 'PREOUEME', 'Préfecture de l\'OUEME', 'NEANT', 'NÉANT', '', NULL, NULL),
-(51, 2, 'PRELITTORAL', 'Préfecture de LITTORAL', 'NEANT', 'NÉANT', '', NULL, NULL);
+(51, 2, 'PRELITTORAL', 'Préfecture de LITTORAL', 'NEANT', 'NÉANT', '', NULL, NULL),
+(52, 10, 'TET', 'Test En Tout', 'cadjehoun, gars', '0166000014', 'test1@example.bj', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2651,7 +2698,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_email_unique` (`email`),
   UNIQUE KEY `users_code_unique` (`code`),
   KEY `users_structure_id_index` (`structure_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=169 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `users`
@@ -2783,7 +2830,9 @@ INSERT INTO `users` (`id`, `code`, `name`, `lastname`, `firstname`, `birthdate`,
 (164, NULL, 'Ibouraima', 'MERE DAOUDA', 'Ibouraima', NULL, NULL, NULL, '97796615', NULL, 1, 1, 'ibmere@yahoo.fr', NULL, '$2y$12$YzVib90.hMO/ADbg4DGgLeXhpsC8s0/rU9eJ0ltiRnEQIiaJhG2xC', NULL, NULL, 18, NULL, NULL, '2025-06-12 16:15:15', NULL),
 (165, NULL, 'César', 'AKLOSSOU', 'Cocou César', NULL, NULL, NULL, '97447132', NULL, 1, 1, 'caklossou@gouv.bj', NULL, '$2y$12$J1CdHtT58LBAr2PtwG6Il.3ftNIJq/ojEhGXdp/mYVfER9Zd9o5/W', NULL, NULL, 17, NULL, NULL, '2025-06-12 16:15:15', NULL),
 (166, NULL, 'Finagnon', 'HINSON', 'Finagnon', NULL, NULL, NULL, '95863778', NULL, 1, 1, 'fhinson@gouv.bj', NULL, '$2y$12$dujXBFkPNsw84ZT1u4YVIuhXC0XkKqGiN2DOW6RHJ528aPN.7HgJu', NULL, NULL, 13, NULL, NULL, '2025-06-12 16:15:15', NULL),
-(167, '001', 'Super Admin', 'Super', 'Admin', '1980-01-01', 'Cityville', '123 Admin Street, Cityville', NULL, NULL, 1, 1, 'superadmin@gouv.bj', NULL, '$2y$12$qtfFuQ2wHuDBxugvKeHTDOi2nDC38qQxSOwwZqDsdOT/m7KDToLO2', NULL, NULL, NULL, NULL, '2025-06-13 07:37:18', '2025-06-13 07:37:18', NULL);
+(167, '001', 'Super Admin', 'Super', 'Admin', '1980-01-01', 'Cityville', '123 Admin Street, Cityville', NULL, NULL, 1, 1, 'superadmin@gouv.bj', NULL, '$2y$12$qtfFuQ2wHuDBxugvKeHTDOi2nDC38qQxSOwwZqDsdOT/m7KDToLO2', NULL, NULL, NULL, NULL, '2025-06-13 07:37:18', '2025-06-13 07:37:18', NULL),
+(169, '002', 'Kouadio Marie-Claire', 'Kouadio', 'Marie-Claire', '1985-03-15', 'Abidjan', 'Rue des Palmiers, Quartier Zongo, Cotonou', '97834567', NULL, 1, 1, 'marie.kouadio@gouv.bj', NULL, '$2y$12$V7ACelSjqHoeRv1SkGWvWeTDNFabiBNc//.pW0PoP0ZAu18I21RHC', NULL, NULL, NULL, NULL, '2025-06-13 11:45:23', '2025-06-13 11:45:23', NULL),
+(170, '003', 'Kouadjo Marie-Claire', 'Kouadjo', 'Marie-Claire', '1985-03-15', 'yamsoukro', 'Rue des Palmiers, Quartier Zongo, Cotonou', '97834567', NULL, 1, 1, 'marie@gouv.bj', NULL, '$2y$12$zRfjLasPnN.4bI9x0vI0cukOOACXW3YjMo/tg0fgi4s4IBX1yqMfW', NULL, NULL, NULL, NULL, '2025-06-13 11:58:00', '2025-06-13 11:59:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -2842,8 +2891,8 @@ CREATE TABLE IF NOT EXISTS `verifications` (
 --
 ALTER TABLE `affectations`
   ADD CONSTRAINT `affectations_reforme_id_foreign` FOREIGN KEY (`reforme_id`) REFERENCES `reformes` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `affectations_unite_admin_down_foreign` FOREIGN KEY (`unite_admin_down`) REFERENCES `entite_admins` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `affectations_unite_admin_up_foreign` FOREIGN KEY (`unite_admin_up`) REFERENCES `entite_admins` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `affectations_unite_admin_down_foreign` FOREIGN KEY (`unite_admin_down`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  ADD CONSTRAINT `affectations_unite_admin_up_foreign` FOREIGN KEY (`unite_admin_up`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 --
 -- Contraintes pour la table `model_has_permissions`
