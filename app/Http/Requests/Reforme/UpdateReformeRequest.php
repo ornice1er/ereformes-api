@@ -27,9 +27,9 @@ class UpdateReformeRequest extends FormRequest
             'couverture_id' => 'sometimes|integer|exists:couvertures,id',
             'libref' => 'sometimes|string|max:500|min:10',
             'typeref' => 'sometimes|string|max:100',
-            'objectif_glob' => 'sometimes|string|max:2000|min:20',
-            'popul_cible' => 'sometimes|string|max:500|min:5',
-            'struct_impl' => 'sometimes|string|max:500|min:5',
+            'objectif_glob' => 'sometimes|string',
+            'popul_cible' => 'sometimes|string',
+            'struct_impl' => 'sometimes|string',
             'periodexe' => 'sometimes|string',
             'date_debut' => 'sometimes|date',
             'date_fin' => 'sometimes|date',
@@ -38,9 +38,9 @@ class UpdateReformeRequest extends FormRequest
             'etat_mor' => 'sometimes|string|in:EN COURS,TERMINÉ,SUSPENDU,ANNULÉ',
             'montant_prevu' => 'sometimes|numeric|min:0|max:999999999.99',
             'montant_trealise' => 'sometimes|numeric|min:0|max:999999999.99',
-            'difficult' => 'sometimes|nullable|string|max:2000',
-            'solution' => 'sometimes|nullable|string|max:2000',
-            'perspective' => 'sometimes|nullable|string|max:2000',
+            'difficult' => 'sometimes|nullable|string',
+            'solution' => 'sometimes|nullable|string',
+            'perspective' => 'sometimes|nullable|string',
             'isPublished' => 'sometimes|boolean'
         ];
     }

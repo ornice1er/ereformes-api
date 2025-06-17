@@ -27,9 +27,9 @@ class StoreReformeRequest extends FormRequest
             'couverture_id' => 'required|integer|exists:couvertures,id',
             'libref' => 'required|string|max:500|min:10',
             'typeref' => 'required|string|max:100',
-            'objectif_glob' => 'required|string|max:2000|min:20',
-            'popul_cible' => 'required|string|max:500|min:5',
-            'struct_impl' => 'required|string|max:500|min:5',
+            'objectif_glob' => 'required|string',
+            'popul_cible' => 'required|string',
+            'struct_impl' => 'required|string',
             'periodexe' => 'required|string',
             'date_debut' => 'date',
             'date_fin' => 'date|after:date_debut',
@@ -38,9 +38,9 @@ class StoreReformeRequest extends FormRequest
             'etat_mor' => 'nullable|string|in:EN COURS,TERMINÉ,SUSPENDU,ANNULÉ',
             'montant_prevu' => 'numeric|min:0|max:999999999.99',
             'montant_trealise' => 'nullable|numeric|min:0|max:999999999.99|lte:montant_prevu',
-            'difficult' => 'nullable|string|max:2000',
-            'solution' => 'nullable|string|max:2000',
-            'perspective' => 'nullable|string|max:2000',
+            'difficult' => 'nullable|string',
+            'solution' => 'nullable|string',
+            'perspective' => 'nullable|string',
             'isPublished' => 'nullable|boolean'
         ];
     }

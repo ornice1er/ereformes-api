@@ -105,14 +105,17 @@ class UserRepository
     // Génération du mot de passe aléatoire
     $plainPassword = Str::random(8);
     $data['password'] = Hash::make($plainPassword);
+    $roles=$data['roles'];
+    unset($data['roles']);
 
     // Création de l'utilisateur
     $user = User::create($data);
 
     // Attribution du rôle (accepte ID ou tableau de rôles)
-    if (!empty($data['roles'])) {
-        $roleIds = is_array($data['roles']) ? $data['roles'] : [$data['roles']];
-        $user->syncRoles($roleIds);
+  // Mise à jour des rôles si fournis
+    if (!empty($roles)) {
+        $roleIds = is_array($roles) ? $roles: [$roles];
+        $model->syncRoles($roleIds);
     }
 
     // Envoi de l'email avec les identifiants
@@ -146,13 +149,15 @@ class UserRepository
         );
         $data['photo'] = 'avatars/' . $filename;
     }
+    $roles=$data['roles'];
+    unset($data['roles']);
 
     // Mise à jour des données utilisateur
     $model->update($data);
 
     // Mise à jour des rôles si fournis
-    if (!empty($data['roles'])) {
-        $roleIds = is_array($data['roles']) ? $data['roles'] : [$data['roles']];
+    if (!empty($roles)) {
+        $roleIds = is_array($roles) ? $roles: [$roles];
         $model->syncRoles($roleIds);
     }
 

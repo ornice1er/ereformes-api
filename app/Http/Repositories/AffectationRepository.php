@@ -6,13 +6,14 @@ use App\Models\Affectation;
 use App\Models\User;
 use App\Models\Parcours;
 use App\Models\Reforme;
+use App\Mail\AlerteReforme;
 use App\Traits\Repository;
 use App\Utilities\FileStorage;
 use App\Utilities\Mailer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
-use Auth;
+use Auth, Mail;
 
 class AffectationRepository
 {
@@ -127,10 +128,14 @@ class AffectationRepository
             'unite_admin_down'=>$ua_down->id,
             'reforme_id'=>$data['reforme_id'],
             'sens'=>$data['sens'],
-            'instruction'=>$data['instuction'],
-            'delay'=>date_create($data['delay']),
+            'instruction'=>$data['instruction'],
+           // 'delay'=>date_create($data['delay']),
             ]);
             Parcours::create(['libelle'=>"Retour de la réforme ".$newReq->libref." par le/la ".$ua_up->structure->designation." au/à la " .$ua_down->structure->designation ,'reforme_id'=>$newReq->id]);
+             Mail::to($ua_down->email)->send(new AlerteReforme('Retour de réforme pour correction',[
+                "user"=>$ua_down
+            ]));
+
            return true;
 
     }else{
@@ -167,9 +172,14 @@ class AffectationRepository
             'sens'=>$data['sens'],
             ]);
             Parcours::create(['libelle'=>"Transmission de la réforme par le/la ".$ua_up->structure->designation." au/à la " .$ua_down->structure->designation ,'reforme_id'=>$newReq->id]);
+
+            Mail::to($ua_down->email)->send(new AlerteReforme('Transmission de réforme pour validation',[
+                "user"=>$ua_down
+            ]));
             return true;
         }
 
+        
 }
 
 

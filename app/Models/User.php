@@ -22,42 +22,9 @@ class User extends Authenticatable implements JWTSubject
     private static $whiteListFilter = ['*'];
 
     // Les attributs qui sont mass-assignable
-    protected $fillable = [
-        'code',
-        'name',
-        'lastname',
-        'firstname',
-        'birthdate',
-        'birthplace',
-        'address',
-        'phone',
-        'photo',
-        'is_active',
-        'is_first_connexion',
-        'email',
-        'password',
-        'token',
-        'email_verified_at',
-        'code_otp',
-        'project_id',
-        'spoken_languages',
-        'understood_languages',
-        'municipality_id',
-        'statut_agent_id',
-        'residence_place',
-        'education_level',
-        'nb_children',
-        'computer_skills',
-        'reference_person',
-        'comment',
-        'cv',
-        'push_token',
-    ];
+    protected $guarded = [];
 
-    protected $casts = [
-        'spoken_languages' => 'array',
-        'understood_languages' => 'array',
-    ];
+    protected $casts = [];
 
     protected $appends = [];
 

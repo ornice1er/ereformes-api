@@ -32,6 +32,7 @@ class StoreUserRequest extends FormRequest
             'birthplace' => 'string|max:255',
             'address' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
+            'structure_id' => 'required|exists:structures,id',
             'roles' => 'sometimes|array',
             'roles.*' => 'exists:roles,name'
 

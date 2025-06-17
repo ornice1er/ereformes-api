@@ -28,6 +28,7 @@ class UpdateUserRequest extends FormRequest
             'email' => 'required|email|unique:users,id,email',
             'firstname' => 'required|string|max:100',
             'lastname' => 'required|string|max:100',
+            'structure_id' => 'required|exists:structures,id',
             'birthdate' => 'date',
             'birthplace' => 'string|max:255',
             'address' => 'required|string|max:255',
