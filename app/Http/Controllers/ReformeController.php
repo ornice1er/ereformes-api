@@ -597,6 +597,25 @@ class ReformeController extends Controller
 
 
     }
+
+    public function UpdateStatut(Request $request,$id)
+    {
+
+        $message = 'Changer le statut de la réforme';
+      //  try {
+            $result = $this->reformeRepository->updateStatut($request, $id);
+            $this->ls->trace(['action_name' => $message, 'description' => json_encode($request->all())]);
+
+            return Common::success('Publication de réforme avec succès', $result);
+        // } catch (\Throwable $th) {
+        //     $this->ls->trace(['action_name' => $message, 'description' => $th->getMessage()]);
+
+        //     return Common::error($th->getMessage(), []);
+        // }
+
+
+    }
+
     public function unpublish(Request $request,$id)
     {
 

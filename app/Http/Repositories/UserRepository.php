@@ -115,7 +115,7 @@ class UserRepository
   // Mise à jour des rôles si fournis
     if (!empty($roles)) {
         $roleIds = is_array($roles) ? $roles: [$roles];
-        $model->syncRoles($roleIds);
+        $user->syncRoles($roleIds);
     }
 
     // Envoi de l'email avec les identifiants

@@ -40,4 +40,14 @@ class Reforme extends Model
        return $this->hasMany(Media::class,"projets_media_id");
     }
 
+    public function notifications()
+    {
+        return $this->hasMany(ReformeNotification::class);
+    }
+
+    public function publicationNotifications()
+    {
+        return $this->hasMany(ReformePublicationNotification::class);
+    }
+
 }
