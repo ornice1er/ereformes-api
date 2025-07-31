@@ -11,6 +11,13 @@ use App\Traits\Repository;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use App\Services\ReformeNotificationPublicationService;
+use App\Notifications\ReformeUnpublishedNotification;
+use App\Models\User;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\ReformStatusChanged;
+use Illuminate\Http\Request;
+
 
 class ReformeRepository
 {
@@ -268,22 +275,110 @@ class ReformeRepository
     }
 
 
-       public function publish($id)
-    {
-        $reforme=Reforme::find($id);
-        $reforme->affectation?->update(['isLast'=>true]);
-        $reforme->update(['isPublished'=>true]);
+    //    public function publish($id)
+    // {
+    //     $reforme=Reforme::find($id);
+    //     $reforme->affectation?->update(['isLast'=>true]);
+    //     $reforme->update(['isPublished'=>true]);
 
-        return [];
+    //     return [];
+    // }
+
+
+public function publish($id)
+{
+    $reforme = Reforme::find($id);
+
+    if (!$reforme) {
+        return response()->json(['message' => 'Réforme introuvable.'], 404);
     }
+
+    // Marquer l'affectation comme la dernière si elle existe
+    $reforme->affectation?->update(['isLast' => true]);
+
+    // Publier la réforme
+    $reforme->update([
+        'isPublished' => true,
+    ]);
+
+    // Instancier et utiliser le service
+    $notificationService = new ReformeNotificationPublicationService();
+    $notificationService->notifyUsersOfPublication($reforme);
+
+    return [];
+}
+
+
+
+
+
 
     public function unpublish($id)
-    {
-        $reforme=Reforme::find($id);
-       if($reforme->affectation) $reforme->affectation->update(['isLast'=>false]);
-        $reforme->update(['isPublished'=>false]);
+{
+    $reforme = Reforme::find($id);
 
-        return [];
+    if (!$reforme) {
+        return response()->json(['message' => 'Réforme introuvable.'], 404);
     }
+
+    // Mettre à jour l'affectation si elle existe
+    if ($reforme->affectation) {
+        $reforme->affectation->update(['isLast' => false]);
+    }
+
+    // Dépublier la réforme
+    $reforme->update(['isPublished' => false]);
+
+    // Récupérer les utilisateurs de la même structure avec les rôles ciblés
+    $users = User::where('structure_id', $reforme->structure_id)
+        ->whereHas('roles', function ($query) {
+            $query->whereIn('name', ['saisie', 'validation']);
+        })
+        ->get();
+
+    // Envoyer la notification
+    Notification::send($users, new ReformeUnpublishedNotification($reforme));
+
+    return [];
+}
+
+
+public function updateStatut(Request $request, $id)
+{// 1. Validation de la requête
+    $request->validate([
+        'statuts' => 'required|string|in:planification,exécution,évaluation', // adapte selon tes statuts
+    ]);
+
+    // 2. Récupération de la réforme
+    $reforme = Reforme::findOrFail($id);
+    $oldStatus = $reforme->statuts;
+    $newStatus = $request->input('statuts');
+
+    // 3. Vérification du changement de statut
+    if ($oldStatus !== $newStatus) {
+        $reforme->statuts = $newStatus;
+        $reforme->save();
+
+        // 4. Récupération des utilisateurs à notifier
+        $user = User::find($reforme->user_id); // ou created_by, selon ta base
+
+        if ($user) {
+            $users = User::where('structure_id', $user->structure_id)
+                ->whereHas('roles', function ($query) {
+                    $query->whereIn('name', ['saisie', 'validation']);
+                })
+                ->get();
+
+            // 5. Envoi de la notification
+            Notification::send($users, new ReformStatusChanged($reforme, $oldStatus, $newStatus));
+        }
+    }
+
+    // 6. Réponse JSON
+    return [];
+
+}
+
+
 
 }

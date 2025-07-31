@@ -727,11 +727,11 @@ class UserAuthController extends Controller
     }
 
 
-    
+
 
             public function saveDatabase()
             {
-                return $this->userAuthRepository->saveDb();
+                return $this->userauthRepository->saveDb();
             }
 
 }

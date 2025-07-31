@@ -126,6 +126,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('reformes/users/get-suivi-result', 'ReformeController@getSuiviResult');
         Route::get('reformes/state/publish/{id}', 'ReformeController@publish');
         Route::get('reformes/state/unpublish/{id}', 'ReformeController@unpublish');
+        Route::patch('reformes/statuts/{id}', 'ReformeController@updateStatut');
+
 
     });
 });
+
