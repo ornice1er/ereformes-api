@@ -94,7 +94,7 @@ class ReformeRepository
      */
     public function get($id)
     {
-        return $this->findOrFail($id);
+        return $this->findOrFail($id)->load('objectifs.results.suiviResults');
     }
 
 
