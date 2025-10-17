@@ -89,24 +89,22 @@ class ReformeRepository
 
     }
 
-    function getAllForPublic($request) {
-             $req = Reforme::with(["objectifs.results.suiviResults"])
-                ->ignoreRequest(['per_page'])
-                ->filter(array_filter($request->all(), function ($k) {
-                    return $k != 'page';
-                }, ARRAY_FILTER_USE_KEY))
-                 ->where('isPublished',true)
-                ->orderBy('id', 'desc');
+function getAllForPublic($request) {
+    $req = Reforme::with(["objectifs.results.suiviResults"])
+        ->ignoreRequest(['per_page'])
+        ->filter(array_filter($request->all(), function ($k) {
+            // On retire 'page' et 'per_page' du tableau transmis au filtre
+            return !in_array($k, ['page', 'per_page']);
+        }, ARRAY_FILTER_USE_KEY))
+        ->where('isPublished', true)
+        ->orderBy('id', 'desc');
 
-        if (array_key_exists('per_page', $request->all())) {
-            $per_page = $request['per_page'];
-            return $req->paginate($per_page);
-        } else {
-            return $req->get();
-        }
+    if ($request->has('per_page')) {
+        return $req->paginate($request->per_page);
     }
 
-
+    return $req->get();
+}
     /**
      * Get a specific reforme by id
      */
