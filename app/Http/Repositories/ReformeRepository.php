@@ -92,10 +92,6 @@ class ReformeRepository
 function getAllForPublic($request) {
     $req = Reforme::with(["objectifs.results.suiviResults"])
         ->ignoreRequest(['per_page'])
-        ->filter(array_filter($request->all(), function ($k) {
-            // On retire 'page' et 'per_page' du tableau transmis au filtre
-            return !in_array($k, ['page', 'per_page']);
-        }, ARRAY_FILTER_USE_KEY))
         ->where('isPublished', true)
         ->orderBy('id', 'desc');
 
