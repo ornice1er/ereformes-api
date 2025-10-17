@@ -64,7 +64,7 @@ class ReformeRepository
             Auth::user()->roles()->first()->name == "publication") {
 
             $req = Reforme::with(["objectifs.results"])
-                ->ignoreRequest(['per_page',])
+                ->ignoreRequest(['per_page'])
                 ->filter(array_filter($request->all(), function ($k) {
                     return $k != 'page';
                 }, ARRAY_FILTER_USE_KEY))
@@ -72,7 +72,7 @@ class ReformeRepository
         } else {
             $req = Reforme::with(["objectifs.results.suiviResults"])
                 ->where("structure_id", Auth::user()->structure->id)
-                ->ignoreRequest(['per_page',])
+                ->ignoreRequest(['per_page'])
                 ->filter(array_filter($request->all(), function ($k) {
                     return $k != 'page';
                 }, ARRAY_FILTER_USE_KEY))
@@ -91,7 +91,7 @@ class ReformeRepository
 
     function getAllForPublic($request) {
              $req = Reforme::with(["objectifs.results.suiviResults"])
-                ->ignoreRequest(['per_page',])
+                ->ignoreRequest(['per_page'])
                 ->filter(array_filter($request->all(), function ($k) {
                     return $k != 'page';
                 }, ARRAY_FILTER_USE_KEY))
