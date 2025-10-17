@@ -26,7 +26,7 @@ class CouvertureController extends Controller
         $this->couvertureRepository = $couvertureRepository;
         $this->ls = $ls;
 
-        //$this->middleware('auth:api')->except(['getNotified', 'show']);
+        $this->middleware('auth:api')->except(['index']);
 
     }
 

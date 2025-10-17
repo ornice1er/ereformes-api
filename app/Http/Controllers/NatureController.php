@@ -26,7 +26,7 @@ class NatureController extends Controller
         $this->natureRepository = $natureRepository;
         $this->ls = $ls;
 
-        //$this->middleware('auth:api')->except(['getNotified', 'show']);
+        $this->middleware('auth:api')->except(['index']);
 
     }
 

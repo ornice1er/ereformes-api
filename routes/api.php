@@ -24,8 +24,20 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('settings', 'SettingController@index');
     Route::post('settings', 'SettingController@update');
 
-    Route::middleware('basic.auth')->group(function () {
 
+    Route::get('reformes/public/suivi-result', 'ReformeController@getAllForPublic');
+
+         Route::apiResources([
+        "couvertures"=>"CouvertureController",
+        "natures"=>"NatureController",
+        "sectors"=>"SectorController",
+        "structures"=>"StructureController",
+        "reformes"=>"ReformeController",
+
+        ]);
+
+    Route::middleware('auth:api')->group(function () {
+     
     });
 
     Route::middleware('auth:api')->group(function () {
@@ -49,13 +61,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             'profiles' => 'ProfilController',
             'permissions' => 'PermissionController',
             'notifications' => 'NotificationController',
-            "couvertures"=>"CouvertureController",
             "affectations"=>"AffectationController",
             "entities"=>"EntiteAdminController",
-            "natures"=>"NatureController",
-            "sectors"=>"SectorController",
-            "structures"=>"StructureController",
-            "reformes"=>"ReformeController",
+           
             "objectifs"=>"ObjectifController",
             "resultats"=>"ResultController",
             "suivi-results"=>"SuivreResultController",

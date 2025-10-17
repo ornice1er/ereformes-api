@@ -26,7 +26,7 @@ class StructureController extends Controller
         $this->structureRepository = $structureRepository;
         $this->ls = $ls;
 
-        //$this->middleware('auth:api')->except(['getNotified', 'show']);
+        $this->middleware('auth:api')->except(['index']);
 
     }
 

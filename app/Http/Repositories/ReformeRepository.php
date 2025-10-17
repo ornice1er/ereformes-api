@@ -47,6 +47,7 @@ class ReformeRepository
     {
         return $this->find($id);
     }
+    
 
     /**
      * Get all reformes with filtering, pagination, and sorting
@@ -63,7 +64,7 @@ class ReformeRepository
             Auth::user()->roles()->first()->name == "publication") {
 
             $req = Reforme::with(["objectifs.results"])
-                ->ignoreRequest(['per_page', 'categorie', 'role'])
+                ->ignoreRequest(['per_page',])
                 ->filter(array_filter($request->all(), function ($k) {
                     return $k != 'page';
                 }, ARRAY_FILTER_USE_KEY))
@@ -71,7 +72,7 @@ class ReformeRepository
         } else {
             $req = Reforme::with(["objectifs.results.suiviResults"])
                 ->where("structure_id", Auth::user()->structure->id)
-                ->ignoreRequest(['per_page', 'categorie', 'role'])
+                ->ignoreRequest(['per_page',])
                 ->filter(array_filter($request->all(), function ($k) {
                     return $k != 'page';
                 }, ARRAY_FILTER_USE_KEY))
@@ -86,6 +87,23 @@ class ReformeRepository
         }
 
 
+    }
+
+    function getAllForPublic($request) {
+             $req = Reforme::with(["objectifs.results.suiviResults"])
+                ->ignoreRequest(['per_page',])
+                ->filter(array_filter($request->all(), function ($k) {
+                    return $k != 'page';
+                }, ARRAY_FILTER_USE_KEY))
+                 ->where('isPublished',true)
+                ->orderBy('id', 'desc');
+
+        if (array_key_exists('per_page', $request->all())) {
+            $per_page = $request['per_page'];
+            return $req->paginate($per_page);
+        } else {
+            return $req->get();
+        }
     }
 
 

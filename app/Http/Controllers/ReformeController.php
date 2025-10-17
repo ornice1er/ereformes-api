@@ -26,7 +26,7 @@ class ReformeController extends Controller
         $this->reformeRepository = $reformeRepository;
         $this->ls = $ls;
 
-        //$this->middleware('auth:api')->except(['getNotified', 'show']);
+        $this->middleware('auth:api')->except(['getAllForPublic']);
 
     }
 
@@ -114,6 +114,23 @@ class ReformeController extends Controller
 
         try {
             $result = $this->reformeRepository->getAll($request);
+            $this->ls->trace(['action_name' => $message, 'description' => json_encode($request->all())]);
+
+            return Common::success($message, $result);
+        } catch (\Throwable $th) {
+            $this->ls->trace(['action_name' => $message, 'description' => $th->getMessage()]);
+
+            return Common::error($th->getMessage(), []);
+        }
+    }
+
+
+     public function getAllForPublic(Request $request)
+    {
+        $message = 'Récupération de la liste des reformes';
+
+        try {
+            $result = $this->reformeRepository->getAllForPublic($request);
             $this->ls->trace(['action_name' => $message, 'description' => json_encode($request->all())]);
 
             return Common::success($message, $result);
