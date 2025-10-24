@@ -45,9 +45,9 @@ class UserRepository
     public function getAll($request)
     {
         $per_page = 10;
-            $data = $request->except(['per_page', 'categorie', 'role', 'page']);
+            $data = $request->except(['per_page', 'page']);
 
-            $req = User::filter($data)
+            $req = User::ignoreRequest($data)
                 ->with('roles')
                 ->orderByDesc('created_at');
 
