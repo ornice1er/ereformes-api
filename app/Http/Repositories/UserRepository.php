@@ -45,13 +45,11 @@ class UserRepository
     public function getAll($request)
     {
         $per_page = 10;
+            $data = $request->except(['per_page', 'categorie', 'role', 'page']);
 
-        $req = User::ignoreRequest(['per_page', 'categorie', 'role'])
-            ->filter(array_filter($request->all(), function ($k) {
-                return $k != 'page';
-            }, ARRAY_FILTER_USE_KEY))
-            ->with('roles')
-            ->orderByDesc('created_at');
+            $req = User::filter($data)
+                ->with('roles')
+                ->orderByDesc('created_at');
 
         // if (array_key_exists('project_id', $request->all())) {
         //     $project_id = $request->project_id;
