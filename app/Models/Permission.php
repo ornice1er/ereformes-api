@@ -10,4 +10,6 @@ final class Permission extends SpatiePermission
     use Filterable;
 
     protected $guarded = [];
+        private static $whiteListFilter = ['*'];
+
 }

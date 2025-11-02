@@ -16,6 +16,9 @@ class Couverture extends Model
         'lib_couvert',
     ];
 
+        private static $whiteListFilter = ['*'];
+
+        
     public $timestamps = false;
 
 }

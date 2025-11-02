@@ -13,5 +13,6 @@ class Sector extends Model
     protected $table = 'sectors';
     protected $guarded = [];
     public $timestamps = false;
+    private static $whiteListFilter = ['*'];
 
 }

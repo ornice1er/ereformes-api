@@ -29,6 +29,9 @@ class Affectation extends Model
         'delay' => 'integer',
     ];
 
+        private static $whiteListFilter = ['*'];
+
+
     // Relations
     public function reforme(): BelongsTo
     {

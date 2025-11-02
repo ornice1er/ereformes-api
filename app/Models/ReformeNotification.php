@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ReformeNotification extends Model
 {
-    use HasFactory;
+    use HasFactory,Filterable;
 
     protected $fillable = [
         'reforme_id',
@@ -19,6 +19,8 @@ class ReformeNotification extends Model
     protected $casts = [
         'sent_at' => 'datetime',
     ];
+        private static $whiteListFilter = ['*'];
+
 
     public function reforme(): BelongsTo
     {

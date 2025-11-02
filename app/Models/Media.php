@@ -11,5 +11,6 @@ class Media extends Model
     use HasFactory, Filterable;
     protected $guarded = [];
     public $timestamps = false;
+    private static $whiteListFilter = ['*'];
 
 }

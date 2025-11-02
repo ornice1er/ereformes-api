@@ -33,6 +33,7 @@ class EntiteAdmin extends Model
     ];
 
 
+    private static $whiteListFilter = ['*'];
 
 
 }
