@@ -101,7 +101,8 @@ class UserRepository
     }
 
     // Génération du mot de passe aléatoire
-    $plainPassword = Str::random(8);
+    //$plainPassword = Str::random(8);
+    $plainPassword ="testtest";
     $data['password'] = Hash::make($plainPassword);
     $roles=$data['roles'];
     unset($data['roles']);
@@ -117,13 +118,13 @@ class UserRepository
     }
 
     // Envoi de l'email avec les identifiants
-    Mailer::sendSimple(
-        'emails.new_account',
-        ['user' => $user, 'password' => $plainPassword],
-        'Identifiants de connexion à la plateforme',
-        $user->name,
-        $user->email
-    );
+    // Mailer::sendSimple(
+    //     'emails.new_account',
+    //     ['user' => $user, 'password' => $plainPassword],
+    //     'Identifiants de connexion à la plateforme',
+    //     $user->name,
+    //     $user->email
+    // );
 
     return $user;
 }
