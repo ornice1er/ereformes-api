@@ -82,11 +82,11 @@
                 <td>{{ $data->typeref }}</td>
             </tr>
             <tr>
-                <th>Objectif Global</th>
+                <th>Objectif global</th>
                 <td>{{ $data->objectif_glob }}</td>
             </tr>
             <tr>
-                <th>Population Cible</th>
+                <th>Population cible</th>
                 <td>{{ $data->popul_cible }}</td>
             </tr>
             <tr>
