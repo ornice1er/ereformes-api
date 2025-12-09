@@ -10,7 +10,7 @@ use App\Models\Parcours;
 use App\Traits\Repository;
 use Exception;
 use Illuminate\Support\Facades\Auth;
-use DB,Pdf,Storage;
+use DB,Pdf,Storage,Str;
 use App\Services\ReformeNotificationPublicationService;
 use App\Notifications\ReformeUnpublishedNotification;
 use App\Models\User;
@@ -410,7 +410,7 @@ function downloadPDF($id) {
         $directory_exist=Storage::disk('public')->exists("temp");
         if(!$directory_exist) Storage::disk('public')->makeDirectory("temp");
 
-        $filename = $reforme->libref . time() . '.pdf';
+        $filename = Str::slug($reforme->libref). time() . '.pdf';
         $path = 'temp/' . $filename;
 
      Pdf::loadView('fiche_reformes',[
