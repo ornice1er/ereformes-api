@@ -90,10 +90,12 @@ function getAllForPublic($request) {
         ->orderBy('id', 'desc');
 
     if ($request->has('per_page')) {
-        return $req->paginate($request->per_page);
+        $reformes= $req->paginate($request->per_page);
+    }else{
+    $reformes=$req->get();
+
     }
 
-    $reformes=$req->get();
 
     $stats=array();
     $stats['total_reforme']=Reforme::count();
