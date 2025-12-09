@@ -658,16 +658,16 @@ class ReformeController extends Controller
 
         $message = 'Arrêter de publier une réforme';
 
-        try {
+        //try {
             $result = $this->reformeRepository->downloadPDF($id);
             $this->ls->trace(['action_name' => $message, 'description' => json_encode($request->all())]);
 
             return Common::success('Liste des roles obtenu avec succès', $result);
-        } catch (\Throwable $th) {
-            $this->ls->trace(['action_name' => $message, 'description' => $th->getMessage()]);
+        // } catch (\Throwable $th) {
+        //     $this->ls->trace(['action_name' => $message, 'description' => $th->getMessage()]);
 
-            return Common::error($th->getMessage(), []);
-        }
+        //     return Common::error($th->getMessage(), []);
+        // }
 
 
     }
