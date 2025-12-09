@@ -21,9 +21,9 @@ Route::get('/', function () {
 
 
 Route::get('/reformes/download/{filename}', function ($filename) {
-    if (! request()->hasValidSignature()) {
-        abort(401, "Lien expiré ou invalide.");
-    }
+    // if (! request()->hasValidSignature()) {
+    //     abort(401, "Lien expiré ou invalide.");
+    // }
 
     $path = 'temp/' . $filename;
 
