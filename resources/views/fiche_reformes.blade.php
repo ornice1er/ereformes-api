@@ -91,10 +91,10 @@
     <div class="section">
         <h4>Objectifs et Résultats</h4>
 
-        @foreach($data->objectifs as $objectif)
+        @foreach($data-?>objectifs as $objectif)
             <h4 style="margin-top:20px;">Objectif : {{ $objectif->libobjectif }}</h4>
 
-            @foreach($objectif->results as $result)
+            @foreach($objectif?->results as $result)
                 <table>
                     <tr>
                         <th colspan="2">Résultat : {{ $result->libresult }}</th>
@@ -124,7 +124,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($result->suivi_results as $sr)
+                        @foreach($result?->suivi_results as $sr)
                             <tr>
                                 <td>{{ $sr->date }}</td>
                                 <td>{{ $sr->valeur_realise }}</td>
