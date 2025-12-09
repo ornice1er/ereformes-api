@@ -653,7 +653,7 @@ class ReformeController extends Controller
     }
 
 
-    public function downloadPDF($id)
+    public function downloadPDF(Request $request,$id)
     {
 
         $message = 'Arrêter de publier une réforme';
