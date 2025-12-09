@@ -10,7 +10,7 @@ use App\Models\Parcours;
 use App\Traits\Repository;
 use Exception;
 use Illuminate\Support\Facades\Auth;
-use DB,Pdf;
+use DB,Pdf,Storage;
 use App\Services\ReformeNotificationPublicationService;
 use App\Notifications\ReformeUnpublishedNotification;
 use App\Models\User;
