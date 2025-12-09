@@ -48,9 +48,6 @@ class MediaRepository
 
         $req = Media::with(['projetMedia']) // Eager loading des relations
             ->ignoreRequest(['per_page'])
-            ->filter(array_filter($request->all(), function ($k) {
-                return $k != 'page';
-            }, ARRAY_FILTER_USE_KEY))
             ->orderByDesc('created_at');
 
         if (array_key_exists('per_page', $request->all())) {

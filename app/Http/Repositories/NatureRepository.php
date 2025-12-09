@@ -43,9 +43,6 @@ class NatureRepository
         $per_page = 10;
 
         $req = Nature::ignoreRequest(['per_page', 'categorie', 'role'])
-            ->filter(array_filter($request->all(), function ($k) {
-                return $k != 'page';
-            }, ARRAY_FILTER_USE_KEY))
             ->orderByDesc('created_at');
 
 

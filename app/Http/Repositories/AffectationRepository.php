@@ -52,9 +52,6 @@ class AffectationRepository
         $per_page = 10;
 
         $req = Affectation::ignoreRequest(['per_page', 'categorie', 'role'])
-            ->filter(array_filter($request->all(), function ($k) {
-                return $k != 'page';
-            }, ARRAY_FILTER_USE_KEY))
             ->orderByDesc('created_at');
 
         // if (array_key_exists('project_id', $request->all())) {

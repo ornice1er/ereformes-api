@@ -40,9 +40,7 @@ class PermissionRepository
     {
         $per_page = 10;
 
-        $req = Permission::ignoreRequest(['per_page', 'with'])->filter(array_filter($request->all(), function ($k) {
-            return $k != 'page';
-        }, ARRAY_FILTER_USE_KEY));
+        $req = Permission::ignoreRequest(['per_page', 'with']);
 
         // ->orderByDesc('created_at');
 

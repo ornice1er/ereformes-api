@@ -42,9 +42,6 @@ class CouvertureRepository
         $per_page = 10;
 
         $req = Couverture::ignoreRequest(['per_page'])
-            ->filter(array_filter($request->all(), function ($k) {
-                return $k != 'page';
-            }, ARRAY_FILTER_USE_KEY))
             ->orderByDesc('created_at');
 
 

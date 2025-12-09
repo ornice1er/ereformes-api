@@ -41,10 +41,7 @@ class StructureRepository
     {
         $per_page = 10;
 
-        $req = Structure::ignoreRequest(['per_page', 'categorie', 'role'])
-            ->filter(array_filter($request->all(), function ($k) {
-                return $k != 'page';
-            }, ARRAY_FILTER_USE_KEY))->with('sector')
+        $req = Structure::ignoreRequest(['per_page', 'categorie', 'role'])->with('sector')
             ->orderByDesc('created_at');
 
 
