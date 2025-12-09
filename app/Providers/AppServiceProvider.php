@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Reforme;
 use App\Observers\ReformeObserver;
+use Illuminate\Support\Facades\URL;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,5 +26,9 @@ class AppServiceProvider extends ServiceProvider
 
         Schema::defaultStringLength(191);
         Reforme::observe(ReformeObserver::class);
+        if (env('APP_ENV')!="local") {
+                URL::forceScheme('https');
+
+        }
     }
 }
