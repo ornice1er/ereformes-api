@@ -28,13 +28,26 @@
             padding-right:15px;
         }
 
-        table{
+       h2, h3, h4 {
+            margin-bottom: 5px;
+        }
+        .section {
+            margin-bottom: 25px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        table {
             width: 100%;
             border-collapse: collapse;
-            border: 1px solid;
+            margin-top: 8px;
         }
-        table, th, td {
-        border: 1px solid;
+        table th, table td {
+            border: 1px solid #999;
+            padding: 6px;
+            font-size: 12px;
+        }
+        table th {
+            background: #f2f2f2;
         }
         header, .row, section {
             display: flex;
