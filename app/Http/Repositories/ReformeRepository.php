@@ -65,17 +65,11 @@ class ReformeRepository
 
             $req = Reforme::with(["objectifs.results"])
                 ->ignoreRequest(['per_page'])
-                ->filter(array_filter($request->all(), function ($k) {
-                    return $k != 'page';
-                }, ARRAY_FILTER_USE_KEY))
                 ->orderBy('id', 'desc');
         } else {
             $req = Reforme::with(["objectifs.results.suiviResults"])
                 ->where("structure_id", Auth::user()->structure->id)
                 ->ignoreRequest(['per_page'])
-                ->filter(array_filter($request->all(), function ($k) {
-                    return $k != 'page';
-                }, ARRAY_FILTER_USE_KEY))
                 ->orderBy('id', 'desc');
         }
 
@@ -99,7 +93,21 @@ function getAllForPublic($request) {
         return $req->paginate($request->per_page);
     }
 
-    return $req->get();
+    $reformes=$req->get();
+
+    $stats=array();
+    $stats['total_reforme']=Reforme::count();
+    $stats['total_reforme_admin']=Reforme::whereHas("nature",function($q){
+        $q->where('libnature', 'like', 'admin%');
+    })->count();
+    $stats['total_reforme_ins']=Reforme::whereHas("nature",function($q){
+        $q->where('libnature', 'like', 'ins%');
+    })->count();
+
+    return [
+        "reformes"=>$reformes,
+        "stats"=>$stats,
+    ];
 }
     /**
      * Get a specific reforme by id
