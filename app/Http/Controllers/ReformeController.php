@@ -26,7 +26,7 @@ class ReformeController extends Controller
         $this->reformeRepository = $reformeRepository;
         $this->ls = $ls;
 
-        $this->middleware('auth:api')->except(['getAllForPublic']);
+        $this->middleware('auth:api')->except(['getAllForPublic','downloadPDF']);
 
     }
 
