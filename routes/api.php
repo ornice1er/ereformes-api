@@ -26,6 +26,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
 
     Route::get('reformes/public/suivi-result', 'ReformeController@getAllForPublic');
+    Route::get('reformes/public/suivi-result/{id}', 'ReformeController@downloadPDF');
 
          Route::apiResources([
         "couvertures"=>"CouvertureController",

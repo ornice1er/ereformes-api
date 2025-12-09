@@ -17,6 +17,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\ReformStatusChanged;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 
 
 class ReformeRepository
@@ -398,6 +399,26 @@ public function updateStatut(Request $request, $id)
 
     // 6. Réponse JSON
     return [];
+
+}
+
+
+function downloadPDF($id) {
+
+        $reforme=Reforme::find($id)->load(["objectifs.results.suiviResults"]);
+
+        $filename = $reforme->libref . time() . '.pdf';
+        $path = 'temp/' . $filename;
+
+     Pdf::loadView('fiche_reformes',[
+            "data"=> $reforme ])
+            ->save(Storage::disk('public')->path($path));
+      $downloadUrl = URL::temporarySignedRoute(
+            'reformes.download', // nom de la route
+            now()->addMinutes(10), // expiration
+            ['filename' => $filename]
+        );
+        return  $downloadUrl;
 
 }
 
