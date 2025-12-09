@@ -91,7 +91,7 @@
     <div class="section">
         <h4>Objectifs et Résultats</h4>
 
-        @foreach($data-?>objectifs as $objectif)
+        @foreach($data?->objectifs as $objectif)
             <h4 style="margin-top:20px;">Objectif : {{ $objectif->libobjectif }}</h4>
 
             @foreach($objectif?->results as $result)
