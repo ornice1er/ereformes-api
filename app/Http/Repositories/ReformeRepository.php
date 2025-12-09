@@ -407,6 +407,9 @@ function downloadPDF($id) {
 
         $reforme=Reforme::find($id)->load(["objectifs.results.suiviResults"]);
 
+        $directory_exist=Storage::disk('public')->exists("temp");
+        if(!$directory_exist) Storage::disk('public')->makeDirectory("temp");
+
         $filename = $reforme->libref . time() . '.pdf';
         $path = 'temp/' . $filename;
 
