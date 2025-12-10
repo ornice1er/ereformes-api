@@ -48,7 +48,7 @@ class UserRepository
             $data = $request->except(['per_page', 'page']);
 
             $req = User::ignoreRequest($data)
-                ->with('roles')
+                ->with('roles','structure')
                 ->orderByDesc('created_at');
 
         // if (array_key_exists('project_id', $request->all())) {
