@@ -31,6 +31,7 @@ class StoreReformeRequest extends FormRequest
             'popul_cible' => 'required|string',
             'struct_impl' => 'required|string',
             'periodexe' => 'required|string',
+            'files' => 'required|array',
             'date_debut' => 'date',
             'date_fin' => 'date|after:date_debut',
             'date_enreg' => 'nullable|date|before_or_equal:today',

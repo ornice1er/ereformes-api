@@ -190,7 +190,7 @@ class EntiteAdminController extends Controller
             $result = $this->EntiteAdminRepository->get($id);
             $this->ls->trace(['action_name' => $message, 'description' => json_encode($result)]);
 
-            return Common::success('Utilisateur trouvé', $result);
+            return Common::success('Entité trouvé', $result);
         } catch (\Throwable $th) {
             $this->ls->trace(['action_name' => $message, 'description' => $th->getMessage()]);
 
@@ -249,7 +249,7 @@ class EntiteAdminController extends Controller
             $result = $this->EntiteAdminRepository->makeStore($request->validated());
             $this->ls->trace(['action_name' => $message, 'description' => json_encode($request->validated())]);
 
-            return Common::successCreate('Utilisateur créé avec succès', $result);
+            return Common::successCreate('Entité créé avec succès', $result);
         } catch (\Throwable $th) {
             $this->ls->trace(['action_name' => $message, 'description' => $th->getMessage()]);
 
@@ -383,7 +383,7 @@ class EntiteAdminController extends Controller
             $result = $this->EntiteAdminRepository->makeDestroy($id);
             $this->ls->trace(['action_name' => $message, 'description' => json_encode($recup)]);
 
-            return Common::successDelete('Utilisateur supprimé avec succès', $result);
+            return Common::successDelete('Entité supprimé avec succès', $result);
         } catch (\Throwable $th) {
             $this->ls->trace(['action_name' => $message, 'description' => $th->getMessage()]);
 
@@ -457,7 +457,7 @@ class EntiteAdminController extends Controller
             $statusMessage = $state == 1 ? 'activé' : 'désactivé';
             $this->ls->trace(['action_name' => $message, 'description' => json_encode($result)]);
 
-            return Common::success("Utilisateur $statusMessage avec succès", $result);
+            return Common::success("Entité $statusMessage avec succès", $result);
         } catch (\Throwable $th) {
             $this->ls->trace(['action_name' => $message, 'description' => $th->getMessage()]);
 

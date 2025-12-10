@@ -129,9 +129,9 @@ class AffectationRepository
            // 'delay'=>date_create($data['delay']),
             ]);
             Parcours::create(['libelle'=>"Retour de la réforme ".$newReq->libref." par le/la ".$ua_up->structure->designation." au/à la " .$ua_down->structure->designation ,'reforme_id'=>$newReq->id]);
-             Mail::to($ua_down->email)->send(new AlerteReforme('Retour de réforme pour correction',[
-                "user"=>$ua_down
-            ]));
+            //  Mail::to($ua_down->email)->send(new AlerteReforme('Retour de réforme pour correction',[
+            //     "user"=>$ua_down
+            // ]));
 
            return true;
 
@@ -170,9 +170,9 @@ class AffectationRepository
             ]);
             Parcours::create(['libelle'=>"Transmission de la réforme par le/la ".$ua_up->structure->designation." au/à la " .$ua_down->structure->designation ,'reforme_id'=>$newReq->id]);
 
-            Mail::to($ua_down->email)->send(new AlerteReforme('Transmission de réforme pour validation',[
-                "user"=>$ua_down
-            ]));
+            // Mail::to($ua_down->email)->send(new AlerteReforme('Transmission de réforme pour validation',[
+            //     "user"=>$ua_down
+            // ]));
             return true;
         }
 
